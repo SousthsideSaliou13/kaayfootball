@@ -28,12 +28,12 @@ export class ListUtilisateurComponent {
   }
   get_utilisateur() {
     let paarms = {
-      "ue.id_entreprise": this.api.current_entreprise.id_entreprise,
+      id_entreprise: this.api.current_entreprise.id_entreprise,
     }
     this.loading_get_utilisateur = true;
-    this.api.taf_post("utilisateur/get3", paarms, (reponse: any) => {
+    this.api.taf_post("utilisateur/get", paarms, (reponse: any) => {
       if (reponse.status) {
-        this.les_utilisateurs = reponse.data?.les_entreprises
+        this.les_utilisateurs = reponse.data
         this.searchService.data = this.les_utilisateurs
         this.searchService.filter_change()
         console.log("Opération effectuée avec succés sur la table utilisateur. Réponse= ", reponse);
