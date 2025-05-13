@@ -13,19 +13,19 @@ import { ListUtilisateurEntrepriseComponent } from './utilisateur-entreprise/lis
 import { ProfilComponent } from './profil/profil.component';
 
 const routes: Routes = [
-  {path:"",component:ListAbonnementComponent},
-{path:"abonnement",component:ListAbonnementComponent},
-{path:"entreprise",component:ListEntrepriseComponent},
-{path:"log",component:ListLogComponent},
-{path:"privilege",component:ListPrivilegeComponent},
-{path:"reservation",component:ListReservationComponent},
-{path:"terrain",component:ListTerrainComponent},
-{path:"type_abonnement",component:ListTypeAbonnementComponent},
-{path:"type_reservation",component:ListTypeReservationComponent},
-{path:"utilisateur",component:ListUtilisateurComponent},
-{path:"profil",component: ProfilComponent},
-{path:"utilisateur_entreprise",component:ListUtilisateurEntrepriseComponent},
-{ path: "", pathMatch: "full", redirectTo: "terrain" },
+  { path: "", component: ListAbonnementComponent },
+  { path: "abonnement", component: ListAbonnementComponent },
+  { path: "entreprise", component: ListEntrepriseComponent },
+  { path: "log", component: ListLogComponent },
+  { path: "privilege", component: ListPrivilegeComponent },
+  { path: "reservation", component: ListReservationComponent },
+  { path: "terrain", component: ListTerrainComponent },
+  { path: "type_abonnement", component: ListTypeAbonnementComponent },
+  { path: "type_reservation", component: ListTypeReservationComponent },
+  { path: "utilisateur", component: ListUtilisateurComponent },
+  { path: "profil", component: ProfilComponent },
+  { path: "utilisateur_entreprise", component: ListUtilisateurEntrepriseComponent },
+  { path: "", pathMatch: "full", redirectTo: "terrain" },
 ];
 
 @NgModule({

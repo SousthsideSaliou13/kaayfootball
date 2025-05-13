@@ -57,7 +57,7 @@ export class AddUtilisateurComponent {
       return;
     }
     var utilisateur = this.reactiveForm_add_utilisateur.value;
-    console.log("Id Entrepriser", utilisateur.id_entreprise)
+    console.log("Id Entreprise", utilisateur.id_entreprise)
     console.log("utilisateur", utilisateur)
     this.add_utilisateur(utilisateur)
   }

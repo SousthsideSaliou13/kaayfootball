@@ -85,7 +85,8 @@
               <div>
                 <h5 class="mb-1 fw-semibold">{{ one_utilisateur.prenom }} {{ one_utilisateur.nom }}</h5>
                 <small class="text-muted">
-                  {{ one_utilisateur.telephone }} • {{ one_utilisateur.adresse }} • {{ one_utilisateur.email }}
+                  {{ one_utilisateur.telephone }} • {{ one_utilisateur.login | titlecase
+                  }}
                 </small>
               </div>
             </td>
@@ -96,9 +97,9 @@
             </td>
             <td class="align-middle">
               <span class="badge p-2" [ngClass]="{
-                'bg-success': one_utilisateur.statut == 'Actif'|| one_utilisateur.statut == 'actif',
-                'bg-danger': one_utilisateur.statut == 'Inactif' || one_utilisateur.statut == 'inactif'
-                }">{{ one_utilisateur.statut | titlecase}}
+                'bg-success': one_utilisateur.etat == 'Actif'|| one_utilisateur.etat == 'actif',
+                'bg-danger': one_utilisateur.etat == 'Inactif' || one_utilisateur.etat == 'inactif'
+                }">{{ one_utilisateur.etat | titlecase}}
               </span>
             </td>
             <td class="text-end pe-4 align-middle">
@@ -106,10 +107,10 @@
                 <i class="bi bi-pencil me-1"></i>
               </button>
               <button class="btn btn-sm ms-1" [ngClass]="{'btn-outline-danger': one_utilisateur.statut == 'Actif'|| one_utilisateur.statut == 'actif',
-                'btn-outline-sencondary':one_utilisateur.statut == 'Inactif' || one_utilisateur.statut == 'inactif'}"
+                'btn-outline-sencondary':one_utilisateur.etat == 'Inactif' || one_utilisateur.etat == 'inactif'}"
                 (click)="delete_utilisateur(one_utilisateur)">
-                <i [ngClass]="{'bi bi-trash': one_utilisateur.statut == 'Actif'|| one_utilisateur.statut == 'actif',
-                'bi bi-save':one_utilisateur.statut == 'Inactif' || one_utilisateur.statut == 'inactif'}"></i>
+                <i [ngClass]="{'bi bi-trash': one_utilisateur.etat == 'Actif'|| one_utilisateur.etat == 'actif',
+                'bi bi-save':one_utilisateur.etat == 'Inactif' || one_utilisateur.etat == 'inactif'}"></i>
               </button>
             </td>
           </tr>

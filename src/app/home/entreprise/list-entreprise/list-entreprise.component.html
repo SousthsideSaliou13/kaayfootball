@@ -1,7 +1,8 @@
 <!-- entete -->
 <div class="d-flex align-items-center justify-content-between">
   <div class="fs-1">
-     <h2> Entreprise - {{ searchService.list.length }} </h2> </div>
+    <h2> Entreprise - {{ searchService.list.length }} </h2>
+  </div>
   <div class="d-flex">
     <button class="btn btn-primary" (click)="openModal_add_entreprise()"><i class="bi bi-plus-circle-dotted"></i>
       Entreprise
@@ -38,29 +39,29 @@
         <!-- <th scope="col">actions</th>
       </tr>
     </thead> -->
-    <tbody>
-      @for (one_entreprise of searchService.list; track one_entreprise) {
-      <tr>
-        <td class="ps-4 align-middle">
-          <div>
-            <h5 class="mb-1 fw-semibold">{{ one_entreprise.libelle_entreprise }}</h5>
-            <small class="text-muted">
-              {{ one_entreprise.telephone }} • {{ one_entreprise.adresse }} • {{ one_entreprise.email }}
-            </small>
-          </div>
-          <!-- {{ one_entreprise.id_entreprise }} -->
-        </td>
-        <td>
-          <span class="badge bg-primary-subtle text-primary rounded-pill">
-            {{ one_entreprise.pays  }}
-          </span>
-          <!-- {{ one_entreprise.libelle_entreprise }} -->
-        </td>
-         <!-- <td></td>
+        <tbody>
+          @for (one_entreprise of searchService.list; track one_entreprise) {
+          <tr>
+            <td class="ps-4 align-middle">
+              <div>
+                <h5 class="mb-1 fw-semibold">{{ one_entreprise.libelle_entreprise }}</h5>
+                <small class="text-muted">
+                  {{ one_entreprise.telephone }} • {{ one_entreprise.adresse }} • {{ one_entreprise.email }}
+                </small>
+              </div>
+              <!-- {{ one_entreprise.id_entreprise }} -->
+            </td>
+            <td>
+              <span class="badge bg-primary-subtle text-primary rounded-pill">
+                {{ one_entreprise.pays }}
+              </span>
+              <!-- {{ one_entreprise.libelle_entreprise }} -->
+            </td>
+            <!-- <td></td>
         <td></td> -->
 
-        <td>{{ one_entreprise.adresse }}</td>
-       <!-- <td>{{ one_entreprise.image }}</td>
+            <td>{{ one_entreprise.adresse }}</td>
+            <!-- <td>{{ one_entreprise.image }}</td>
         <td>{{ one_entreprise.site_web }}</td>
         <td>{{ one_entreprise.ninea }}</td>
         <td>{{ one_entreprise.registre_de_commerce }}</td>
@@ -68,20 +69,20 @@
         <td>{{ one_entreprise.created_at }}</td>
         <td>{{ one_entreprise.updated_at }}</td>
         <td>{{ one_entreprise.etat }}</td> -->
-        <td class="text-end pe-4 align-middle">
-          <button class="btn btn-outline-primary btn-sm" (click)="openModal_edit_entreprise(one_entreprise)">
-            <i class="bi bi-pencil me-1"></i> Modifier
-          </button>
-         <!-- <button class="btn btn-sm ms-1"
+            <td class="text-end pe-4 align-middle">
+              <button class="btn btn-outline-primary btn-sm" (click)="openModal_edit_entreprise(one_entreprise)">
+                <i class="bi bi-pencil me-1"></i>
+              </button>
+              <!-- <button class="btn btn-sm ms-1"
            [ngClass]="{'btn-outline-danger': one_entreprise.etat == 'Actif'|| one_entreprise.etat == 'actif',
             'btn-outline-sencondary':one_entreprise.etat == 'Inactif' || one_entreprise.etat == 'inactif'}"
             (click)="delete_entreprise(one_entreprise)"> -->
-            <!-- <i [ngClass]="{'bi bi-trash': one_entreprise.etat == 'Actif'|| one_entreprise.etat == 'actif',
+              <!-- <i [ngClass]="{'bi bi-trash': one_entreprise.etat == 'Actif'|| one_entreprise.etat == 'actif',
             'bi bi-save':one_entreprise.etat == 'Inactif' || one_entreprise.etat == 'inactif'}"></i> -->
 
-        </td>
-      </tr>
-      }
-    </tbody>
-  </table>
-</div>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>

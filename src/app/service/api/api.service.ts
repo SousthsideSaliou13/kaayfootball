@@ -353,6 +353,34 @@ export class ApiService {
       }
     )
   }
+  async taf_post_with_files(path: string, data_to_send: any, form_files: any, on_success: Function, on_error: Function) {
+    let api_url = this.taf_base_url + path;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: "Bearer " + await this.get_token(),
+      })
+    };
+    const formData = new FormData();
+    // Ajouter les données du formulaire au FormData
+    for (const key in data_to_send) {
+      formData.append(key, data_to_send[key]);
+    }
+    // Ajouter les fichiers sélectionné au FormData
+    for (const key in form_files) {
+      for (let i = 0; i < form_files[key].length; i++) {
+        const one_file = form_files[key][i];
+        formData.append(key + "[]", one_file);
+      }
+    }
+    this.http.post(api_url, formData, httpOptions).subscribe(
+      (reponse: any) => {// on success
+        on_success(reponse)
+      },
+      (error: any) => {// on error
+        this.on_taf_post_error(error, on_error)
+      }
+    )
+  }
   async taf_post_login(path: string, data_to_send: any, on_success: Function, on_error: Function) {
     let api_url = this.taf_base_url + path;
 

@@ -14,7 +14,7 @@
         <ng-option value="">Sélectionnez une Entreprise</ng-option>
         @for (one_entreprise of form_details?.les_entreprises; track $index) {
         <ng-option [value]="one_entreprise.id_entreprise">
-          {{ one_entreprise.nom_entreprise}}
+          {{ one_entreprise.libelle_entreprise}}
         </ng-option>
         }
       </ng-select>
@@ -35,7 +35,7 @@
         <ng-option value="">Choisir un Privilége</ng-option>
         @for (one_privilege of form_details?.les_privileges; track $index) {
         <ng-option [value]="one_privilege.id_privilege">
-          {{ one_privilege.libelle }}
+          {{ one_privilege.libelle_privilege }}
         </ng-option>
         }
       </ng-select>

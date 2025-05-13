@@ -1,5 +1,6 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu">
-  <div class="d-flex align-items-center justify-content-center demo app-brand" id="logo_kaayfootball_bloc">
+  <div class="d-flex flex-column flex-xl-row align-items-center justify-content-center app-brand"
+    id="logo_kaayfootball_bloc">
     <!-- <svg class="logo-svg" viewBox="0 0 157 18" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
       d=""
@@ -9,23 +10,24 @@
       <!-- <div class="align-content-center text-center mb-1" id="logo_kaayfootball_bloc">
         <img style="width: 40px;" src="img/balle2.png" alt="KAAY FOOTBALL">
      </div> -->
-     <div class="justify-content-center text-center justify-content-between mt-2 mb-4" style="font-size: 80px;" id="logo_kaayfootball_bloc">
+      <div class="justify-content-center text-center justify-content-between mt-2 mb-4" style="font-size: 80px;"
+        id="logo_kaayfootball_bloc">
 
-      <div class="spinner-border text-success" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
+        <div class="spinner-border text-success" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
         <div class="spinner-border text-warning" role="status">
-        <span class="visually-hidden">Loading...</span>
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-border text-danger" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
       </div>
-      <div class="spinner-border text-danger" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-     </div>
 
       <!-- <img style="width: 100px;" src="img/player.png" alt="KAAYFOOTBALL"> -->
     </div>
-    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-      <i class="bx bx-chevron-left bx-sm align-middle"></i>
+    <a class=" menu-link text-large mt-2 d-block d-xl-none" (click)="toggleMenu(false)">
+      <i class="bx" [class]="isMenuOpen ? 'bx bx-chevron-right bx-sm' :'bx-x bx-sm'"></i>
     </a>
 
   </div>
@@ -38,7 +40,7 @@
     <!-- <li class="menu-header small text-uppercase">
         <span class="menu-header-text"></span>
       </li> -->
-    <ng-container *ngFor="let un_menu of api.menu">
+    <ng-container (click)="isMenuOpen==false" *ngFor="let un_menu of api.menu">
       <!-- Dashboard -->
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">{{ un_menu.menu_header }}</span>

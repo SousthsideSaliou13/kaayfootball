@@ -4,16 +4,33 @@
 @import 'bootstrap/scss/bootstrap';
 @import url(../node_modules/@ng-select/ng-select/themes/default.theme.css);
 
+.layout-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1030;
+}
+
+/* si jamais le backdrop restait en desktop pour une raison X,
+   on le neutralise quand même */
+@media (min-width: 992px) {
+  .layout-menu-backdrop {
+    display: none !important;
+  }
+}
+
 html,
 body {
   height: 100%;
   background-color: white;
   --bs-body-font-family: 'Poppins', sans-serif !important
 }
+
 button.btn.btn-primary {
   background-color: #e94560 !important;
   border-color: #e94560 !important;
 }
+
 body {
   margin: 0;
 }
