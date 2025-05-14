@@ -1,200 +1,144 @@
 <div class="modal-header" data-bs-theme="ligth">
-        <h1 class="modal-title fs-5">Modifier reservation</h1>
-        <button type="button" class="btn-close" aria-label ="Close" (click)="activeModal.close()"></button>
+  <h1 class="modal-title fs-5">Modifier reservation</h1>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.close()"></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="reactiveForm_edit_reservation" (ngSubmit)="onSubmit_edit_reservation()"
+    #form_edit_reservation="ngForm" class="row">
+    <!-- Champ Id Terrain (Clé étrangère vers terrain) -->
+    <div class="form-group col-sm-6 mb-3">
+      <label class="mb-2">Terrain <span class="text-danger">*</span></label>
+      <select [ngClass]="{ 'is-invalid': submitted && f.id_terrain.errors }" class="form-select"
+        formControlName="id_terrain">
+        <option value="" disabled>Sélectionnez un(e) Terrain</option>
+        @for (one_terrain of form_details?.les_terrains; track $index) {
+        <option [value]="one_terrain.id_terrain">
+          {{one_terrain.libelle_terrain }}
+        </option>
+        }
+      </select>
+      @if (submitted && f.id_terrain.errors) {
+      <div class="invalid-feedback">
+        @if (f.id_terrain.errors.required) {
+        <div>Ce champ est obligatoire</div>
+        }
+      </div>
+      }
     </div>
-    <div class="modal-body">
-      <form [formGroup]="reactiveForm_edit_reservation" (ngSubmit)="onSubmit_edit_reservation()" #form_edit_reservation="ngForm" class="row">
-        
-<!-- Champs Id Entreprise avec un contrôle de validité : clé étrangère liée à la colonne id_entreprise de la table entreprise -->
-            <div class="form-group col-sm-6">
-              <label class="mb-2" >Entreprise</label >
-              <select [ngClass]="{ 'is-invalid': submitted && f.id_entreprise.errors }" class="form-select" formControlName="id_entreprise">
-                <option value="">Sélectionnez un(e) Entreprise</option>
-                @for (one_entreprise of form_details?.les_entreprises; track $index) {
-                  <option [value]="one_entreprise.id_entreprise">
-                    {{"Entreprise N°" + one_entreprise.id_entreprise}}
-                  </option>
-                }
-              </select>
-              @if (submitted && f.id_entreprise.errors) {
-                <div class="invalid-feedback">
-                  @if (f.id_entreprise.errors.required) {
-                    <div>Ce champ est obligatoire</div>
-                  }
-                </div>
-              }
-            </div>
-<!-- Champs Id Utilisateur avec un contrôle de validité : clé étrangère liée à la colonne id_utilisateur de la table utilisateur -->
-            <div class="form-group col-sm-6">
-              <label class="mb-2" >Utilisateur</label >
-              <select [ngClass]="{ 'is-invalid': submitted && f.id_utilisateur.errors }" class="form-select" formControlName="id_utilisateur">
-                <option value="">Sélectionnez un(e) Utilisateur</option>
-                @for (one_utilisateur of form_details?.les_utilisateurs; track $index) {
-                  <option [value]="one_utilisateur.id_utilisateur">
-                    {{"Utilisateur N°" + one_utilisateur.id_utilisateur}}
-                  </option>
-                }
-              </select>
-              @if (submitted && f.id_utilisateur.errors) {
-                <div class="invalid-feedback">
-                  @if (f.id_utilisateur.errors.required) {
-                    <div>Ce champ est obligatoire</div>
-                  }
-                </div>
-              }
-            </div>
-<!-- Champs Id Terrain avec un contrôle de validité : clé étrangère liée à la colonne id_terrain de la table terrain -->
-            <div class="form-group col-sm-6">
-              <label class="mb-2" >Terrain</label >
-              <select [ngClass]="{ 'is-invalid': submitted && f.id_terrain.errors }" class="form-select" formControlName="id_terrain">
-                <option value="">Sélectionnez un(e) Terrain</option>
-                @for (one_terrain of form_details?.les_terrains; track $index) {
-                  <option [value]="one_terrain.id_terrain">
-                    {{"Terrain N°" + one_terrain.id_terrain}}
-                  </option>
-                }
-              </select>
-              @if (submitted && f.id_terrain.errors) {
-                <div class="invalid-feedback">
-                  @if (f.id_terrain.errors.required) {
-                    <div>Ce champ est obligatoire</div>
-                  }
-                </div>
-              }
-            </div>
-<!-- Champs Id Type Reservation avec un contrôle de validité : clé étrangère liée à la colonne id_type_reservation de la table type_reservation -->
-            <div class="form-group col-sm-6">
-              <label class="mb-2" >Type Reservation</label >
-              <select [ngClass]="{ 'is-invalid': submitted && f.id_type_reservation.errors }" class="form-select" formControlName="id_type_reservation">
-                <option value="">Sélectionnez un(e) Type Reservation</option>
-                @for (one_type_reservation of form_details?.les_type_reservations; track $index) {
-                  <option [value]="one_type_reservation.id_type_reservation">
-                    {{"Type Reservation N°" + one_type_reservation.id_type_reservation}}
-                  </option>
-                }
-              </select>
-              @if (submitted && f.id_type_reservation.errors) {
-                <div class="invalid-feedback">
-                  @if (f.id_type_reservation.errors.required) {
-                    <div>Ce champ est obligatoire</div>
-                  }
-                </div>
-              }
-            </div>
-<!-- Libelle Reservation field avec un contrôle de validité -->
-            <div class="form-group col-sm-6">
-              <label class="mb-2" >Libelle Reservation</label >
-              <input class="form-control" type="text" formControlName="libelle_reservation" placeholder="Libelle Reservation" [ngClass]="{ 'is-invalid': submitted && f.libelle_reservation.errors }"/>
-              @if (submitted && f.libelle_reservation.errors) {
-                <div class="invalid-feedback">
-                  @if (f.libelle_reservation.errors.required) {
-                    <div>Ce champ est obligatoire</div>
-                  }
-                </div>
-              }
-            </div>
-<!-- Date field avec un contrôle de validité -->
-            <div class="form-group col-sm-6">
-              <label class="mb-2" >Date</label >
-              <input class="form-control" type="text" formControlName="date" placeholder="Date" [ngClass]="{ 'is-invalid': submitted && f.date.errors }"/>
-              @if (submitted && f.date.errors) {
-                <div class="invalid-feedback">
-                  @if (f.date.errors.required) {
-                    <div>Ce champ est obligatoire</div>
-                  }
-                </div>
-              }
-            </div>
-<!-- Heure Debut field avec un contrôle de validité -->
-            <div class="form-group col-sm-6">
-              <label class="mb-2" >Heure Debut</label >
-              <input class="form-control" type="text" formControlName="heure_debut" placeholder="Heure Debut" [ngClass]="{ 'is-invalid': submitted && f.heure_debut.errors }"/>
-              @if (submitted && f.heure_debut.errors) {
-                <div class="invalid-feedback">
-                  @if (f.heure_debut.errors.required) {
-                    <div>Ce champ est obligatoire</div>
-                  }
-                </div>
-              }
-            </div>
-<!-- Heure Fin field avec un contrôle de validité -->
-            <div class="form-group col-sm-6">
-              <label class="mb-2" >Heure Fin</label >
-              <input class="form-control" type="text" formControlName="heure_fin" placeholder="Heure Fin" [ngClass]="{ 'is-invalid': submitted && f.heure_fin.errors }"/>
-              @if (submitted && f.heure_fin.errors) {
-                <div class="invalid-feedback">
-                  @if (f.heure_fin.errors.required) {
-                    <div>Ce champ est obligatoire</div>
-                  }
-                </div>
-              }
-            </div>
-<!-- Evaluation field avec un contrôle de validité -->
-            <div class="form-group col-sm-6">
-              <label class="mb-2" >Evaluation</label >
-              <input class="form-control" type="text" formControlName="evaluation" placeholder="Evaluation" [ngClass]="{ 'is-invalid': submitted && f.evaluation.errors }"/>
-              @if (submitted && f.evaluation.errors) {
-                <div class="invalid-feedback">
-                  @if (f.evaluation.errors.required) {
-                    <div>Ce champ est obligatoire</div>
-                  }
-                </div>
-              }
-            </div>
-<!-- Etat field avec un contrôle de validité -->
-            <div class="form-group col-sm-6">
-              <label class="mb-2" >Etat</label >
-              <input class="form-control" type="text" formControlName="etat" placeholder="Etat" [ngClass]="{ 'is-invalid': submitted && f.etat.errors }"/>
-              @if (submitted && f.etat.errors) {
-                <div class="invalid-feedback">
-                  @if (f.etat.errors.required) {
-                    <div>Ce champ est obligatoire</div>
-                  }
-                </div>
-              }
-            </div>
-<!-- Created At field avec un contrôle de validité -->
-            <div class="form-group col-sm-6">
-              <label class="mb-2" >Created At</label >
-              <input class="form-control" type="text" formControlName="created_at" placeholder="Created At" [ngClass]="{ 'is-invalid': submitted && f.created_at.errors }"/>
-              @if (submitted && f.created_at.errors) {
-                <div class="invalid-feedback">
-                  @if (f.created_at.errors.required) {
-                    <div>Ce champ est obligatoire</div>
-                  }
-                </div>
-              }
-            </div>
-<!-- Updated At field avec un contrôle de validité -->
-            <div class="form-group col-sm-6">
-              <label class="mb-2" >Updated At</label >
-              <input class="form-control" type="text" formControlName="updated_at" placeholder="Updated At" [ngClass]="{ 'is-invalid': submitted && f.updated_at.errors }"/>
-              @if (submitted && f.updated_at.errors) {
-                <div class="invalid-feedback">
-                  @if (f.updated_at.errors.required) {
-                    <div>Ce champ est obligatoire</div>
-                  }
-                </div>
-              }
-            </div>
-<!-- Statut field avec un contrôle de validité -->
-            <div class="form-group col-sm-6">
-              <label class="mb-2" >Statut</label >
-              <input class="form-control" type="text" formControlName="statut" placeholder="Statut" [ngClass]="{ 'is-invalid': submitted && f.statut.errors }"/>
-              @if (submitted && f.statut.errors) {
-                <div class="invalid-feedback">
-                  @if (f.statut.errors.required) {
-                    <div>Ce champ est obligatoire</div>
-                  }
-                </div>
-              }
-            </div>
-      </form>
+
+    <!-- Champ Id Type Reservation (Clé étrangère vers type_reservation) -->
+    <div class="form-group col-sm-6 mb-3">
+      <label class="mb-2">Type Reservation</label>
+      <select [ngClass]="{ 'is-invalid': submitted && f.id_type_reservation.errors }" class="form-select"
+        formControlName="id_type_reservation">
+        <option value="" disabled>Sélectionnez un(e) Type Reservation</option>
+        @for (one_type_reservation of form_details?.les_type_reservations; track $index) {
+        <option [value]="one_type_reservation.id_type_reservation">
+          {{one_type_reservation.libelle_type_reservation }}
+        </option>
+        }
+      </select>
+      @if (submitted && f.id_type_reservation.errors) {
+      <div class="invalid-feedback">
+        @if (f.id_type_reservation.errors.required) {
+        <div>Ce champ est obligatoire</div>
+        }
+      </div>
+      }
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-primary m-2" [disabled]="loading_edit_reservation ||
-      loading_get_details_edit_reservation_form" (click)="form_edit_reservation.ngSubmit.emit()">
-          {{ loading_edit_reservation ? "En cours ..." : "Valider" }}
-      </button>
-      <button type="button" class="btn btn-outline-danger" (click)="activeModal.close()">Fermer</button>
+
+    <!-- Champ Libelle Reservation -->
+    <div class="form-group col-sm-6 mb-3">
+      <label class="mb-2">Libelle Reservation</label>
+      <input class="form-control" type="text" formControlName="libelle_reservation" placeholder="Libelle Reservation"
+        [ngClass]="{ 'is-invalid': submitted && f.libelle_reservation.errors }" />
+      @if (submitted && f.libelle_reservation.errors) {
+      <div class="invalid-feedback">
+        @if (f.libelle_reservation.errors.required) {
+        <div>Ce champ est obligatoire</div>
+        }
+      </div>
+      }
     </div>
+
+    <!-- Champ Date -->
+    <div class="form-group col-sm-6 mb-3">
+      <label class="mb-2">Date <span class="text-danger">*</span></label>
+      <input class="form-control" type="date" formControlName="date" placeholder="Date"
+        [ngClass]="{ 'is-invalid': submitted && f.date.errors }" />
+      @if (submitted && f.date.errors) {
+      <div class="invalid-feedback">
+        @if (f.date.errors.required) {
+        <div>Ce champ est obligatoire</div>
+        }
+      </div>
+      }
+    </div>
+
+    <!-- Champ Heure Debut -->
+    <div class="form-group col-sm-6 mb-4">
+      <label class="mb-2">Heure Debut <span class="text-danger">*</span></label>
+      <input class="form-control" type="time" formControlName="heure_debut" placeholder="Heure Debut"
+        [ngClass]="{ 'is-invalid': submitted && f.heure_debut.errors }" />
+      @if (submitted && f.heure_debut.errors) {
+      <div class="invalid-feedback">
+        @if (f.heure_debut.errors.required) {
+        <div>Ce champ est obligatoire</div>
+        }
+      </div>
+      }
+    </div>
+
+    <!-- Champ Heure Fin -->
+    <div class="form-group col-sm-6 mb-4">
+      <label class="mb-2">Heure Fin <span class="text-danger">*</span></label>
+      <input class="form-control" type="time" formControlName="heure_fin" placeholder="Heure Fin"
+        [ngClass]="{ 'is-invalid': submitted && f.heure_fin.errors }" />
+      @if (submitted && f.heure_fin.errors) {
+      <div class="invalid-feedback">
+        @if (f.heure_fin.errors.required) {
+        <div>Ce champ est obligatoire</div>
+        }
+      </div>
+      }
+    </div>
+
+    <!-- Champ Evaluation -->
+    <!-- <div class="form-group col-sm-12">
+      <label class="mb-2">Evaluation</label>
+      <textarea class="form-control" type="text" formControlName="evaluation" placeholder="Evaluation"
+        [ngClass]="{ 'is-invalid': submitted && f.evaluation.errors }"></textarea>
+      @if (submitted && f.evaluation.errors) {
+      <div class="invalid-feedback">
+        @if (f.evaluation.errors.required) {
+        <div>Ce champ est obligatoire</div>
+        }
+      </div>
+      }
+    </div> -->
+
+    <!-- Champ Etat -->
+    <!-- <div class="form-group col-sm-6">
+      <label class="mb-2">Etat</label>
+      <textarea class="form-control" type="text" formControlName="etat" placeholder="Etat"
+        [ngClass]="{ 'is-invalid': submitted && f.etat.errors }" ></textarea>
+      @if (submitted && f.etat.errors) {
+      <div class="invalid-feedback">
+        @if (f.etat.errors.required) {
+        <div>Ce champ est obligatoire</div>
+        }
+      </div>
+      }
+    </div> -->
+
+
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary m-2" [disabled]="loading_edit_reservation ||
+      loading_get_details_edit_reservation_form || reactiveForm_edit_reservation.pristine"
+    (click)="form_edit_reservation.ngSubmit.emit()">
+    {{ loading_edit_reservation ? "En cours ..." : "Valider" }}
+  </button>
+  <button type="button" class="btn btn-outline-danger" (click)="activeModal.close()">Fermer</button>
+</div>

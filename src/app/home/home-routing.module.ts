@@ -13,7 +13,7 @@ import { ListUtilisateurEntrepriseComponent } from './utilisateur-entreprise/lis
 import { ProfilComponent } from './profil/profil.component';
 
 const routes: Routes = [
-  { path: "", component: ListAbonnementComponent },
+  { path: "", component: ListReservationComponent },
   { path: "abonnement", component: ListAbonnementComponent },
   { path: "entreprise", component: ListEntrepriseComponent },
   { path: "log", component: ListLogComponent },
@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: "utilisateur", component: ListUtilisateurComponent },
   { path: "profil", component: ProfilComponent },
   { path: "utilisateur_entreprise", component: ListUtilisateurEntrepriseComponent },
-  { path: "", pathMatch: "full", redirectTo: "terrain" },
+  { path: "", pathMatch: "full", redirectTo: "reservation" },
 ];
 
 @NgModule({

@@ -5,31 +5,17 @@
       <i class="bi bi-calendar-plus-fill"></i> Type Abonnements
     </button>
   </div>
-  <button
-    type="button"
-    class="btn-close"
-    aria-label="Close"
-    (click)="activeModal.close()"
-  ></button>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.close()"></button>
 </div>
 <div class="modal-body">
-  <form
-    [formGroup]="reactiveForm_add_abonnement"
-    (ngSubmit)="onSubmit_add_abonnement()"
-    #form_add_abonnement="ngForm"
-    class="row"
-  >
+  <form [formGroup]="reactiveForm_add_abonnement" (ngSubmit)="onSubmit_add_abonnement()" #form_add_abonnement="ngForm"
+    class="row">
     <!-- Champ Id Type Abonnement (Clé étrangère vers type_abonnement) -->
     <div class="form-group col-sm-12 col-md-6 mb-4">
-      <label class="mb-2"
-        >Type Abonnement <span class="text-danger">*</span></label
-      >
-      <select
-        [ngClass]="{ 'is-invalid': submitted && f.id_type_abonnement.errors }"
-        class="form-select"
-        formControlName="id_type_abonnement"
-      >
-        <option value="">Sélectionnez un(e) Type Abonnement</option>
+      <label class="mb-2">Type Abonnement <span class="text-danger">*</span></label>
+      <select [ngClass]="{ 'is-invalid': submitted && f.id_type_abonnement.errors }" class="form-select"
+        formControlName="id_type_abonnement">
+        <option value="" disabled>Sélectionnez un(e) Type Abonnement</option>
         @for (one_type_abonnement of form_details?.les_type_abonnements; track
         $index) {
         <option [value]="one_type_abonnement.id_type_abonnement">
@@ -48,16 +34,9 @@
 
     <!-- Champ Libelle Abonnement -->
     <div class="form-group col-sm-12 col-md-6 mb-4">
-      <label class="mb-2"
-        >Libelle Abonnement <span class="text-danger">*</span></label
-      >
-      <input
-        class="form-control"
-        type="text"
-        formControlName="libelle_abonnement"
-        placeholder="Libelle Abonnement"
-        [ngClass]="{ 'is-invalid': submitted && f.libelle_abonnement.errors }"
-      />
+      <label class="mb-2">Abonnement <span class="text-danger">*</span></label>
+      <input class="form-control" type="text" formControlName="libelle_abonnement" placeholder="Libelle Abonnement"
+        [ngClass]="{ 'is-invalid': submitted && f.libelle_abonnement.errors }" />
       @if (submitted && f.libelle_abonnement.errors) {
       <div class="invalid-feedback">
         @if (f.libelle_abonnement.errors.required) {
@@ -70,13 +49,8 @@
     <!-- Champ Date Debut -->
     <div class="form-group col-sm-6 col-md-6 mb-4">
       <label class="mb-2">Date Debut <span class="text-danger">*</span></label>
-      <input
-        class="form-control"
-        type="date"
-        formControlName="date_debut"
-        placeholder="Date Debut"
-        [ngClass]="{ 'is-invalid': submitted && f.date_debut.errors }"
-      />
+      <input class="form-control" type="date" formControlName="date_debut" placeholder="Date Debut"
+        [ngClass]="{ 'is-invalid': submitted && f.date_debut.errors }" />
       @if (submitted && f.date_debut.errors) {
       <div class="invalid-feedback">
         @if (f.date_debut.errors.required) {
@@ -89,13 +63,8 @@
     <!-- Champ Date Fin -->
     <div class="form-group col-sm-6 col-md-6 mb-4">
       <label class="mb-2">Date Fin <span class="text-danger">*</span></label>
-      <input
-        class="form-control"
-        type="date"
-        formControlName="date_fin"
-        placeholder="Date Fin"
-        [ngClass]="{ 'is-invalid': submitted && f.date_fin.errors }"
-      />
+      <input class="form-control" type="date" formControlName="date_fin" placeholder="Date Fin"
+        [ngClass]="{ 'is-invalid': submitted && f.date_fin.errors }" />
       @if (submitted && f.date_fin.errors) {
       <div class="invalid-feedback">
         @if (f.date_fin.errors.required) {
@@ -125,13 +94,8 @@
     <!-- Champ Reduction -->
     <div class="form-group col-sm-12">
       <label class="mb-2">Reduction</label>
-      <input
-        class="form-control"
-        type="number"
-        formControlName="reduction"
-        placeholder="10 --%"
-        [ngClass]="{ 'is-invalid': submitted && f.reduction.errors }"
-      />
+      <input class="form-control" type="number" formControlName="reduction" placeholder="10 --%"
+        [ngClass]="{ 'is-invalid': submitted && f.reduction.errors }" />
       @if (submitted && f.reduction.errors) {
       <div class="invalid-feedback">
         @if (f.reduction.errors.required) {
@@ -143,21 +107,12 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button
-    type="button"
-    class="btn btn-primary m-2"
-    [disabled]="
+  <button type="button" class="btn btn-primary m-2" [disabled]="
       loading_add_abonnement || loading_get_details_add_abonnement_form
-    "
-    (click)="form_add_abonnement.ngSubmit.emit()"
-  >
+    " (click)="form_add_abonnement.ngSubmit.emit()">
     {{ loading_add_abonnement ? "En cours ..." : "Valider" }}
   </button>
-  <button
-    type="button"
-    class="btn btn-outline-danger"
-    (click)="activeModal.close()"
-  >
+  <button type="button" class="btn btn-outline-danger" (click)="activeModal.close()">
     Fermer
   </button>
 </div>

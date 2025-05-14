@@ -1,37 +1,40 @@
 <!-- entete -->
-  <div class="d-flex align-items-center justify-content-between">
-    <div class="fs-1">TypeAbonnement  - {{les_type_abonnements.length}}</div>
-    <div class="d-flex">
-      <button class="btn btn-primary" (click)="openModal_add_type_abonnement()">Ajouter TypeAbonnement</button>
-    </div>
+<div class="d-flex align-items-center justify-content-between">
+  <div class="fs-1 mb-3">TypeAbonnement - {{les_type_abonnements.length}}</div>
+  <div class="d-flex">
+    <button class="btn btn-primary" (click)="openModal_add_type_abonnement()">Ajouter TypeAbonnement</button>
   </div>
-  <!-- Liste des éléments -->
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">id_type_abonnement</th>
-<th scope="col">libelle_type_abonnement</th>
-<th scope="col">description</th>
-<th scope="col">etat</th>
-<th scope="col">created_at</th>
-<th scope="col">updated_at</th><th scope="col">actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (one_type_abonnement of les_type_abonnements; track one_type_abonnement) {
-          <tr>
-            <td>{{one_type_abonnement.id_type_abonnement}}</td>
-<td>{{one_type_abonnement.libelle_type_abonnement}}</td>
-<td>{{one_type_abonnement.description}}</td>
-<td>{{one_type_abonnement.etat}}</td>
-<td>{{one_type_abonnement.created_at}}</td>
-<td>{{one_type_abonnement.updated_at}}</td><td>
-    <i style="cursor: pointer;" class="bi bi-pencil-square me-2" (click)="openModal_edit_type_abonnement(one_type_abonnement)"></i>
-    <i style="cursor: pointer;" class="bi bi-trash" (click)="delete_type_abonnement(one_type_abonnement)"></i>
-</td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
+</div>
+<!-- Liste des éléments -->
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">id_type_abonnement</th>
+        <th scope="col">libelle_type_abonnement</th>
+        <th scope="col">description</th>
+        <th scope="col">etat</th>
+        <th scope="col">created_at</th>
+        <th scope="col">updated_at</th>
+        <th scope="col">actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (one_type_abonnement of les_type_abonnements; track one_type_abonnement) {
+      <tr>
+        <td>{{one_type_abonnement.id_type_abonnement}}</td>
+        <td>{{one_type_abonnement.libelle_type_abonnement}}</td>
+        <td>{{one_type_abonnement.description}}</td>
+        <td>{{one_type_abonnement.etat}}</td>
+        <td>{{one_type_abonnement.created_at}}</td>
+        <td>{{one_type_abonnement.updated_at}}</td>
+        <td>
+          <i style="cursor: pointer;" class="bi bi-pencil-square me-2"
+            (click)="openModal_edit_type_abonnement(one_type_abonnement)"></i>
+          <i style="cursor: pointer;" class="bi bi-trash" (click)="delete_type_abonnement(one_type_abonnement)"></i>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

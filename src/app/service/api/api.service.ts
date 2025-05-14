@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import moment from 'moment';
 import 'moment/locale/fr';
 import { Location } from '@angular/common';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -28,19 +29,7 @@ export class ApiService {
     {
       menu_header: "Accueil",
       items: [
-        {
-          name: "Terrain",
-          path: "/home/terrain",
-          icon: "bi bi-border",
-          children: [],
-          les_actions: [
-            { menu: "Terrain", ongle: "Terrain", id: "list_Terrain", action: "Lister les Terrains" },
-            { menu: "Terrain", ongle: "Terrain", id: "edit_Terrain", action: "Editer un Terrain" },
-            { menu: "Terrain", ongle: "Terrain", id: "add_Terrain", action: "Ajouter un Terrain" },
-            { menu: "Terrain", ongle: "Terrain", id: "delete_Terrain", action: "Supprimer un Terrain" },
 
-          ],
-        },
         {
           name: "Reservation",
           path: "/home/reservation",
@@ -51,6 +40,19 @@ export class ApiService {
             { menu: "Reservation", ongle: "Reservation", id: "edit_Reservation", action: "Editer un Reservation" },
             { menu: "Reservation", ongle: "Reservation", id: "add_Reservation", action: "Ajouter un Reservation" },
             { menu: "Reservation", ongle: "Reservation", id: "delete_Reservation", action: "Supprimer un Reservation" },
+
+          ],
+        },
+        {
+          name: "Terrain",
+          path: "/home/terrain",
+          icon: "bi bi-border",
+          children: [],
+          les_actions: [
+            { menu: "Terrain", ongle: "Terrain", id: "list_Terrain", action: "Lister les Terrains" },
+            { menu: "Terrain", ongle: "Terrain", id: "edit_Terrain", action: "Editer un Terrain" },
+            { menu: "Terrain", ongle: "Terrain", id: "add_Terrain", action: "Ajouter un Terrain" },
+            { menu: "Terrain", ongle: "Terrain", id: "delete_Terrain", action: "Supprimer un Terrain" },
 
           ],
         },

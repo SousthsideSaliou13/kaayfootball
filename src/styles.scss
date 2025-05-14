@@ -36,7 +36,7 @@ body {
 }
 
 .bg-menu-theme .menu-item.active>.menu-link:not(.menu-toggle) {
-  background-color: rgba(190, 21, 140, 0.897) !important;
+  background-color: rgba(188, 146, 175, 0.897) !important;
 }
 
 .cliquable {
@@ -56,37 +56,11 @@ body {
   // position: fixed !important;
 }
 
-.ngs {
-  // min-width: 400px !important;
-}
 
-.ngs2 {
-  // min-width: 150px !important;
-}
 
-.fc .fc-daygrid-day-frame {
-  // height: 150px;
-  // background: red;
-  // overflow: scroll;
-}
-
-.fc-daygrid-event {
-  white-space: break-spaces !important;
-}
-
-.fc-multimonth-month {
-  width: 49% !important;
-  margin-bottom: 25px;
-}
-
-.fc-multiMonthFourMonth-view {
-  display: flex;
-  justify-content: space-between;
-}
-
-.fc-col-header-cell-cushion {
-  color: #1c5145;
-}
+// .fc-col-header-cell-cushion {
+//   color: #1c5145;
+// }
 
 .ng-dropdown-panel .ng-select-bottom {
   z-index: 990;
@@ -101,16 +75,7 @@ body {
 // }
 
 /* Tableau */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: #fff;
-  border-radius: 6px;
-  // overflow: hidden;
-  /* pour gérer les bords arrondis si besoin */
-  // margin-bottom: 10px;
 
-}
 
 // thead,th {
 //   background-color: #E8EBED;
@@ -278,3 +243,15 @@ h1,
   font-weight: 500;
   color: #566a7f !important;
 }
+
+/* -------------------------------------
+   Palette & variables globales
+------------------------------------- */
+$fc-confirmed: #198754; // vert Bootstrap
+$fc-pending: #ffc107; // jaune
+$fc-cancelled: #dc3545; // rouge
+$fc-default: #0d6efd; // bleu
+
+$fc-radius: .45rem;
+$fc-font-size: .75rem;
+$fc-shadow: 0 0 6px rgba(0, 0, 0, .15);

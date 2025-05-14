@@ -1,0 +1,174 @@
+/* my-calendar.component.scss */
+.main_content_calendar {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+
+    /* Calendrier */
+    .football-calendar {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f6f8;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+        /* En-tête et jours de la semaine */
+        .fc-header-toolbar {
+            background-color: #ff9800;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.2rem;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+            .fc-button {
+                background-color: #ff5722;
+                color: white;
+                font-weight: bold;
+                border-radius: 5px;
+
+                &:hover {
+                    background-color: #e64a19;
+                }
+            }
+        }
+
+        /* Visibilité des événements (réservations) */
+        .fc-event {
+            background-color: #4caf50;
+            color: white;
+            border-radius: 5px;
+            padding: 5px 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #388e3c;
+            }
+        }
+
+        /* Style des dates */
+        .fc-daygrid-day-number {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #2196f3;
+        }
+
+        /* Grille du calendrier */
+        .fc-daygrid-day {
+            border-radius: 10px;
+            transition: background-color 0.3s ease-in-out;
+
+            &:hover {
+                background-color: #f1f1f1;
+            }
+        }
+    }
+
+    /* Liste des réservations sous forme de cartes */
+    .eventList {
+        max-width: 350px;
+        margin-top: 20px;
+
+        /* Barre de navigation des réservations */
+        .reservation-nav {
+            .nav-pills {
+                .nav-link {
+                    color: #ff5722;
+                    font-weight: bold;
+                    transition: background-color 0.3s ease;
+
+                    &.active {
+                        background-color: #ff5722;
+                        color: white;
+                    }
+
+                    &:hover {
+                        background-color: #ff9800;
+                        color: white;
+                    }
+                }
+            }
+        }
+
+        .reservation-cards {
+            .card {
+                background-color: #ffffff;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                cursor: pointer;
+
+                &:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+                }
+
+                .card-body {
+                    .card-title {
+                        font-size: 1.25rem;
+                        color: #ff5722;
+                        font-weight: bold;
+                    }
+
+                    .card-text {
+                        color: #555;
+                    }
+
+                    .btn-primary {
+                        background-color: #ff9800;
+                        border-color: #ff9800;
+                        color: white;
+                        font-weight: bold;
+                        border-radius: 5px;
+
+                        &:hover {
+                            background-color: #f57c00;
+                            border-color: #f57c00;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.pagination {
+    font-size: 6px;
+    text-align: end;
+}
+
+/* my-calendar.component.scss */
+.football-calendar {
+
+    /* Cibler l'en-tête des jours de la semaine */
+    .fc-col-header-cell-cushion {
+        color: #2196f3 !important;
+        /* Bleu pour les jours de la semaine */
+    }
+
+    /* Cibler les numéros des jours dans la grille du calendrier */
+    .fc-daygrid-day-number {
+        color: #2196f3 !important;
+        /* Bleu pour les numéros de jours */
+    }
+
+    /* Cibler l'en-tête du mois */
+    .fc-toolbar-title {
+        color: #2196f3 !important;
+        /* Bleu pour le titre du mois */
+    }
+
+    /* Cibler les événements (réservations) dans le calendrier */
+    .fc-event-title {
+        color: #2196f3 !important;
+        /* Bleu pour le texte des événements */
+    }
+
+    .fc .fc-timegrid-slot-label-cushion {
+        color: #2196f3 !important;
+    }
+}

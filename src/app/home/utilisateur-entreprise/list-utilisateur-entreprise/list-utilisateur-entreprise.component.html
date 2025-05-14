@@ -1,37 +1,42 @@
 <!-- entete -->
-  <div class="d-flex align-items-center justify-content-between">
-    <div class="fs-1">UtilisateurEntreprise  - {{les_utilisateur_entreprises.length}}</div>
-    <div class="d-flex">
-      <button class="btn btn-primary" (click)="openModal_add_utilisateur_entreprise()">Ajouter UtilisateurEntreprise</button>
-    </div>
+<div class="d-flex align-items-center justify-content-between">
+  <div class="fs-1 mb-3">UtilisateurEntreprise - {{les_utilisateur_entreprises.length}}</div>
+  <div class="d-flex">
+    <button class="btn btn-primary" (click)="openModal_add_utilisateur_entreprise()">Ajouter
+      UtilisateurEntreprise</button>
   </div>
-  <!-- Liste des éléments -->
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">id_utilisateur_entreprise</th>
-<th scope="col">id_utilisateur</th>
-<th scope="col">id_entreprise</th>
-<th scope="col">id_privilege</th>
-<th scope="col">created_at</th>
-<th scope="col">updated_at</th><th scope="col">actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (one_utilisateur_entreprise of les_utilisateur_entreprises; track one_utilisateur_entreprise) {
-          <tr>
-            <td>{{one_utilisateur_entreprise.id_utilisateur_entreprise}}</td>
-<td>{{one_utilisateur_entreprise.id_utilisateur}}</td>
-<td>{{one_utilisateur_entreprise.id_entreprise}}</td>
-<td>{{one_utilisateur_entreprise.id_privilege}}</td>
-<td>{{one_utilisateur_entreprise.created_at}}</td>
-<td>{{one_utilisateur_entreprise.updated_at}}</td><td>
-    <i style="cursor: pointer;" class="bi bi-pencil-square me-2" (click)="openModal_edit_utilisateur_entreprise(one_utilisateur_entreprise)"></i>
-    <i style="cursor: pointer;" class="bi bi-trash" (click)="delete_utilisateur_entreprise(one_utilisateur_entreprise)"></i>
-</td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
+</div>
+<!-- Liste des éléments -->
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">id_utilisateur_entreprise</th>
+        <th scope="col">id_utilisateur</th>
+        <th scope="col">id_entreprise</th>
+        <th scope="col">id_privilege</th>
+        <th scope="col">created_at</th>
+        <th scope="col">updated_at</th>
+        <th scope="col">actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (one_utilisateur_entreprise of les_utilisateur_entreprises; track one_utilisateur_entreprise) {
+      <tr>
+        <td>{{one_utilisateur_entreprise.id_utilisateur_entreprise}}</td>
+        <td>{{one_utilisateur_entreprise.id_utilisateur}}</td>
+        <td>{{one_utilisateur_entreprise.id_entreprise}}</td>
+        <td>{{one_utilisateur_entreprise.id_privilege}}</td>
+        <td>{{one_utilisateur_entreprise.created_at}}</td>
+        <td>{{one_utilisateur_entreprise.updated_at}}</td>
+        <td>
+          <i style="cursor: pointer;" class="bi bi-pencil-square me-2"
+            (click)="openModal_edit_utilisateur_entreprise(one_utilisateur_entreprise)"></i>
+          <i style="cursor: pointer;" class="bi bi-trash"
+            (click)="delete_utilisateur_entreprise(one_utilisateur_entreprise)"></i>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

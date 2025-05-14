@@ -1,7 +1,7 @@
 <!-- En-tête -->
 <div class="d-flex align-items-center justify-content-between mb-3">
-  <div>
-    <h2 class="fw-bold mb-0">📋 Abonnements <small class="text-muted">({{ searchService.list.length }})</small></h2>
+  <div class="fs-1 mb-3">
+    <h2> Abonnements - {{ searchService.list.length }}</h2>
   </div>
   <div>
     <button class="btn btn-primary" (click)="openModal_add_abonnement()">
@@ -31,7 +31,8 @@
             </td>
             <td class="text-nowrap">
               <small class="text-muted">
-                {{ one_abonnement.date_debut | date:'EEEE d MMMM yyyy' }} → {{ one_abonnement.date_fin | date:'EEEE d MMMM yyyy' }}
+                {{ one_abonnement.date_debut | date:'EEEE d MMMM yyyy' }} → {{ one_abonnement.date_fin | date:'EEEE d
+                MMMM yyyy' }}
               </small>
             </td>
             <td>

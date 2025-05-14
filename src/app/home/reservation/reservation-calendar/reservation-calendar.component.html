@@ -1,0 +1,61 @@
+<!-- my-calendar.component.html -->
+<div class="main_content_calendar d-flex flex-column flex-lg-row gap-4">
+    <!-- Calendrier -->
+    <section class="eventCalendar flex-fill order-2 order-lg-1">
+        <full-calendar [options]="calendarOptions" #calendar class="football-calendar">
+            <ng-template #eventContent let-arg>
+                <div class="event-card text-center">
+                    <p class="text-center title m-0" role="button" data-bs-toggle="modal"
+                        data-bs-target="#detailCoaching">
+                        {{ arg.event.title }}
+                    </p>
+                    <span class="event-time">{{ arg.event.start | date: 'shortTime' }} – {{ arg.event.end | date:
+                        'shortTime' }}</span>
+
+                </div>
+            </ng-template>
+        </full-calendar>
+    </section>
+
+    <!-- Liste des réservations avec barre de navigation -->
+    <aside class="eventList flex-lg-shrink-0 order-1 order-lg-2">
+        <h3 class="d-flex justify-content-between align-items-center">
+            Réservations
+        </h3>
+
+        <!-- Barre de navigation pour filtrer les réservations -->
+        <div class="reservation-nav mb-3">
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <button class="nav-link active" (click)="filterReservations('all')">Toutes</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" (click)="filterReservations('today')">Aujourd'hui</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" (click)="filterReservations('upcoming')">À venir</button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Liste des réservations sous forme de cartes -->
+        <div class="reservation-cards mt-4">
+            <div *ngFor="let one_event of filteredReservations | paginate:{ itemsPerPage: 3, currentPage: p}"
+                class="card mb-3 shadow-sm rounded">
+                <div class="card-body">
+                    <h5 class="card-title">{{ one_event.date | date: 'fullDate' | titlecase}}</h5>
+                    <p class="card-text">
+                        <strong>Heure:</strong> {{ one_event.heure_debut }} h – {{ one_event.heure_fin }} h
+                    </p>
+                    <p class="card-text text-muted">
+                        <strong>Lieu:</strong> {{ one_event.libelle_terrain || 'Non spécifié' }}
+                    </p>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailCoaching">
+                        Détails
+                    </button>
+                </div>
+            </div>
+            <pagination-controls class="pagination" (pageChange)="p = $event"></pagination-controls>
+        </div>
+    </aside>
+</div>

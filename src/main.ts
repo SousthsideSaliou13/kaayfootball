@@ -2,8 +2,9 @@
 
 import { bootstrapApplication } from '@angular/platform-browser';
 import { registerLocaleData } from '@angular/common';
+import { FullCalendarModule } from '@fullcalendar/angular';
 import localeFr from '@angular/common/locales/fr';
-import { LOCALE_ID } from '@angular/core';
+import { importProvidersFrom, LOCALE_ID } from '@angular/core';
 import { AppComponent } from './app/app.component';
 import { appConfig } from './app/app.config';
 
@@ -13,6 +14,7 @@ registerLocaleData(localeFr);
 bootstrapApplication(AppComponent, {
   ...appConfig,
   providers: [
+    importProvidersFrom(FullCalendarModule),
     ...(appConfig.providers || []),
     { provide: LOCALE_ID, useValue: 'fr' }
   ]
