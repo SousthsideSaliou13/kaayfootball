@@ -77,42 +77,44 @@ body {
 /* Tableau */
 
 
-// thead,th {
-//   background-color: #E8EBED;
+thead,
+th {
+  background-color: #E8EBED;
 
+}
+
+.table:not(.table-dark) th {
+  color: #1c5145;
+
+
+  // th {
+  //   background-color: #E8EBED;
+
+  // }
+
+  // .table:not(.table-dark) th {
+  //   color: #1c5145;
+  // }
+
+  // th,
+  // td {
+  //   text-align: left;
+  //   padding: 12px;
+  //   border-bottom: 1px solid #ddd;
+  //   color: #333;
+
+}
+
+// th, td {
+//   text-align: left;
+//   padding: 12px;
+//   border-bottom: 1px solid #ddd;
+//   color: #333;
 // }
-// .table:not(.table-dark) th {
-//   color: #1c5145;
 
-
-//   // th {
-//   //   background-color: #E8EBED;
-
-//   // }
-
-//   // .table:not(.table-dark) th {
-//   //   color: #1c5145;
-//   // }
-
-//   // th,
-//   // td {
-//   //   text-align: left;
-//   //   padding: 12px;
-//   //   border-bottom: 1px solid #ddd;
-//   //   color: #333;
-
+// th {
+//   font-weight: 600;
 // }
-
-// // th, td {
-// //   text-align: left;
-// //   padding: 12px;
-// //   border-bottom: 1px solid #ddd;
-// //   color: #333;
-// // }
-
-// // th {
-// //   font-weight: 600;
-// // }
 
 // /* Dernière ligne sans bordure */
 // tbody tr:last-child td {
@@ -140,13 +142,13 @@ body {
 //   gap: 10px;
 // }
 
-// .pagination-controls button {
-//   background-color: #fff;
-//   border: 1px solid #ccc;
-//   padding: 6px 12px;
-//   border-radius: 4px;
-//   cursor: pointer;
-// }
+.pagination-controls button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
 // .pagination-controls button:disabled {
 //   cursor: not-allowed;
