@@ -4,10 +4,11 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
 import { ApiService } from '../../../service/api/api.service';
 import { CommonModule } from '@angular/common';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
 @Component({
   selector: 'app-add-reservation',
   standalone: true, // Composant autonome
-  imports: [CommonModule, ReactiveFormsModule], // Dépendances importées
+  imports: [CommonModule, ReactiveFormsModule, NgSelectModule], // Dépendances importées
   templateUrl: './add-reservation.component.html',
   styleUrls: ['./add-reservation.component.scss']
 })
@@ -36,7 +37,7 @@ export class AddReservationComponent {
       evaluation: [""],
       // etat: ["", Validators.required],
       // updated_at: ["", Validators.required],
-      // statut: [""]
+      statut: [""]
     });
   }
 

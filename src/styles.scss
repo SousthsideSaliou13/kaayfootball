@@ -4,6 +4,12 @@
 @import 'bootstrap/scss/bootstrap';
 @import url(../node_modules/@ng-select/ng-select/themes/default.theme.css);
 
+
+// @import 'themes/calendar_green.css';
+// @import 'themes/calendar_traditional.css';
+// @import 'themes/calendar_transparent.css';
+// @import 'themes/calendar_white.css';
+
 .layout-menu-backdrop {
   position: fixed;
   inset: 0;
@@ -76,6 +82,42 @@ body {
 
 /* Tableau */
 
+/* Filtres de Réservations (Nav Pills) */
+.reservation-filters .nav-link {
+  border-radius: 50px;
+  padding: 8px 18px;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+
+  /* Styles pour les boutons par défaut (non-actifs), basés sur votre image */
+  color: var(--color-filter-default-text);
+  /* Texte vert */
+  background-color: var(--color-filter-default-border);
+  /* Fond orange */
+  border: 1px solid var(--color-filter-default-border);
+  /* Bordure orange */
+  margin-right: 8px;
+}
+
+.reservation-filters .nav-link:hover {
+  background-color: var(--color-filter-hover);
+  /* Rose plus clair au survol */
+  color: white;
+  /* Texte blanc au survol */
+  border-color: var(--color-filter-hover);
+}
+
+.reservation-filters .nav-link.active {
+  background-color: var(--color-filter-active);
+  /* Rose vif quand ACTIF */
+  color: white;
+  /* Texte blanc quand actif */
+  border-color: var(--color-filter-active);
+}
+
+.reservation-filters {
+  justify-content: center;
+}
 
 thead,
 th {
@@ -105,42 +147,219 @@ th {
 
 }
 
-// th, td {
-//   text-align: left;
-//   padding: 12px;
-//   border-bottom: 1px solid #ddd;
-//   color: #333;
-// }
+/* ==========================================================
+   Styles pour l'en-tête du calendrier FullCalendar
+   Ces styles doivent être globaux (dans src/styles.scss)
+   pour affecter les éléments générés par la librairie FullCalendar.
+   ========================================================== */
 
-// th {
-//   font-weight: 600;
-// }
+/* Variables pour les couleurs personnalisées (si non déjà définies) */
+:root {
+  --fc-primary-color: #007bff;
+  /* Couleur principale pour les éléments actifs */
+  --fc-text-color: #333;
+  /* Couleur du texte général */
+  --fc-border-color: #e0e0e0;
+  /* Couleur des bordures */
+  --fc-active-bg: #e9ecef;
+  /* Fond pour les éléments actifs/hover */
+  --fc-header-bg: #f8f9fa;
+  /* Fond de l'en-tête */
+}
 
-// /* Dernière ligne sans bordure */
-// tbody tr:last-child td {
-//   border-bottom: none;
-// }
 
-// // /* Petite flèche indicative de tri (statique) */
-// .arrow {
-//   font-size: 12px;
-//   margin-left: 4px;
-//   color: #999;
-// }
+/* Styles du conteneur global de l'en-tête */
+.fc-header-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  /* Permet aux éléments de l'en-tête de passer à la ligne sur petits écrans */
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: var(--fc-header-bg);
+  /* Fond léger pour l'en-tête */
+  border-bottom: 1px solid var(--fc-border-color);
+  border-top-left-radius: 10px;
+  /* Assure la continuité avec le card-like design */
+  border-top-right-radius: 10px;
+  margin-bottom: 10px;
+  /* Espace entre l'en-tête et le corps du calendrier */
+}
 
-// // /* Pagination info */
-// .pagination-info {
-//   font-size: 14px;
-//   color: #666;
-//   margin-bottom: 10px;
-// }
+/* Titre (Mois/Année ou Plage de dates) */
+.fc-toolbar-title {
+  font-size: 1.8em;
+  /* Plus grand et plus visible */
+  font-weight: 700;
+  /* Gras */
+  color: var(--fc-text-color);
+  margin: 10px 0;
+  /* Espace autour du titre sur petits écrans */
+  flex-grow: 1;
+  /* Permet au titre de prendre de la place */
+  text-align: center;
+  /* Centrer le titre */
+}
 
-// // /* Contrôles de pagination */
-// .pagination-controls {
-//   display: flex;
-//   align-items: center;
-//   gap: 10px;
-// }
+/* Groupes de boutons (Précédent, Suivant, Aujourd'hui) */
+.fc-toolbar-chunk {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+  /* Espacement pour les groupes de boutons */
+}
+
+
+/* Boutons de navigation (Précédent, Suivant, Aujourd'hui) */
+.fc-prev-button,
+.fc-next-button,
+.fc-today-button {
+  background-color: transparent;
+  border: 1px solid var(--fc-primary-color);
+  color: var(--fc-primary-color);
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  margin: 0 5px;
+  /* Espacement entre les boutons */
+  font-size: 0.9em;
+  /* Taille de police pour "Aujourd'hui" */
+}
+
+.fc-prev-button:hover,
+.fc-next-button:hover,
+.fc-today-button:hover {
+  background-color: var(--fc-primary-color);
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles spécifiques pour les icônes des boutons (si FullCalendar utilise des icônes) */
+.fc-icon {
+  font-size: 1.2em;
+  vertical-align: middle;
+}
+
+/* Boutons de vue (Mois, Semaine, Jour) */
+.fc-button-group {
+  display: flex;
+  border: 1px solid var(--fc-primary-color);
+  border-radius: 5px;
+  overflow: hidden;
+  /* Pour que les coins arrondis soient uniformes */
+  margin: 0 5px;
+}
+
+.fc-button-group>.fc-button {
+  background-color: transparent;
+  border: none;
+  /* Les boutons internes n'ont pas de bordure individuelle */
+  color: var(--fc-primary-color);
+  padding: 8px 15px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  font-size: 0.9em;
+}
+
+.fc-button-group>.fc-button:not(:last-child) {
+  border-right: 1px solid var(--fc-primary-color);
+  /* Séparateur entre les boutons */
+}
+
+.fc-button-group>.fc-button:hover {
+  background-color: var(--fc-active-bg);
+  /* Fond légèrement grisé au survol */
+  color: var(--fc-primary-color);
+  /* Conserver la couleur du texte */
+}
+
+.fc-button-group>.fc-button.fc-button-active {
+  background-color: var(--fc-primary-color);
+  /* Fond plein pour le bouton actif */
+  color: white;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  /* Légère ombre interne */
+}
+
+
+/* En-tête des jours de la semaine (lun. 23/06...) */
+.fc-col-header-cell {
+  background-color: #f0f4f7;
+  /* Fond léger pour les en-têtes de colonnes */
+  border-bottom: 1px solid var(--fc-border-color);
+  padding: 10px 5px;
+  text-align: center;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: #555;
+}
+
+.fc-col-header-cell-cushion {
+  display: block;
+  /* S'assure que le contenu prend toute la place pour le padding */
+  padding: 2px;
+  /* Un peu de padding interne */
+}
+
+/* Les noms des jours (Lun, Mar...) */
+.fc-col-header-cell .fc-widget-header-text {
+  text-transform: uppercase;
+  /* Mettre en majuscules */
+  font-size: 0.9em;
+}
+
+/* Les dates dans l'en-tête des jours (23/06) - si affichées */
+.fc-col-header-cell .fc-col-header-cell-text {
+  display: block;
+  font-size: 0.8em;
+  opacity: 0.8;
+}
+
+/* Ajustements pour la vue par jour/semaine (timeGrid) */
+.fc .fc-timegrid-slot-label-frame {
+  font-size: 0.85em;
+  /* Taille de police pour les heures sur le côté */
+  color: #777;
+}
+
+/* Ajustements responsifs pour l'en-tête */
+@media (max-width: 768px) {
+  .fc-header-toolbar {
+    flex-direction: column;
+    /* Empiler les éléments sur petits écrans */
+    align-items: center;
+    padding: 10px;
+  }
+
+  .fc-toolbar-chunk {
+    width: 100%;
+    /* Les groupes de boutons prennent toute la largeur */
+    justify-content: center;
+    /* Centrer les boutons */
+    margin-bottom: 10px;
+  }
+
+  .fc-toolbar-title {
+    font-size: 1.5em;
+    /* Taille plus petite sur mobile */
+    order: -1;
+    /* Placer le titre en haut */
+    margin-bottom: 15px;
+  }
+
+  .fc-prev-button,
+  .fc-next-button,
+  .fc-today-button,
+  .fc-button-group>.fc-button {
+    padding: 6px 12px;
+    /* Réduire le padding */
+    font-size: 0.8em;
+    /* Réduire la taille de police */
+  }
+}
 
 .pagination-controls button {
   background-color: #fff;
@@ -257,3 +476,13 @@ $fc-default: #0d6efd; // bleu
 $fc-radius: .45rem;
 $fc-font-size: .75rem;
 $fc-shadow: 0 0 6px rgba(0, 0, 0, .15);
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

@@ -40,7 +40,7 @@ export class EditReservationComponent {
       evaluation: [reservation_to_edit.evaluation],
       // etat: [reservation_to_edit.etat, Validators.required],
 
-      // statut: [reservation_to_edit.statut]
+      statut: [reservation_to_edit.statut]
     });
   }
 

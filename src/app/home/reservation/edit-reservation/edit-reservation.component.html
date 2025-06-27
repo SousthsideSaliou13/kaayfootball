@@ -27,7 +27,7 @@
     </div>
 
     <!-- Champ Id Type Reservation (Clé étrangère vers type_reservation) -->
-    <div class="form-group col-sm-6 mb-3">
+    <!-- <div class="form-group col-sm-6 mb-3">
       <label class="mb-2">Type Reservation</label>
       <select [ngClass]="{ 'is-invalid': submitted && f.id_type_reservation.errors }" class="form-select"
         formControlName="id_type_reservation">
@@ -45,8 +45,26 @@
         }
       </div>
       }
-    </div>
+    </div> -->
 
+    <div class="form-group col-sm-6 mb-3">
+      <label class="mb-2">Statut</label>
+      <select placeholder="Sélectionnez un statut" formControlName="statut"
+        [ngClass]="{ 'is-invalid': submitted && f.statut.errors }" class="form-select">
+        <option value="" disabled selected>Sélectionnez un statut</option>
+        <option value="confirmee">Confirmée</option>
+        <option value="reservee">Réservée</option>
+        <option value="annulee">Annulée</option>
+        <option value="terminee">Terminée</option>
+      </select>
+      @if (submitted && f.statut.errors) {
+      <div class="invalid-feedback">
+        @if (f.statut.errors.required) {
+        <div>Ce champ est obligatoire</div>
+        }
+      </div>
+      }
+    </div>
     <!-- Champ Libelle Reservation -->
     <div class="form-group col-sm-6 mb-3">
       <label class="mb-2">Libelle Reservation</label>
