@@ -21,15 +21,15 @@
 
         <ul class="nav nav-pills mb-3 reservation-filters">
             <li class="nav-item">
-                <button class="nav-link" [class.active]="filtre === 'all'"
+                <button class="nav-link1" [class.active]="filtre === 'all'"
                     (click)="filterReservations('all')">Toutes</button>
             </li>
             <li class="nav-item">
-                <button class="nav-link" [class.active]="filtre === 'today'"
+                <button class="nav-link1" [class.active]="filtre === 'today'"
                     (click)="filterReservations('today')">Aujourd'hui</button>
             </li>
             <li class="nav-item">
-                <button class="nav-link" [class.active]="filtre === 'upcoming'"
+                <button class="nav-link1" [class.active]="filtre === 'upcoming'"
                     (click)="filterReservations('upcoming')">À venir</button>
             </li>
         </ul>
@@ -63,8 +63,12 @@
             </div>
         </div>
 
+        <div class="justify-content-center align-items-center">
+            <pagination-controls class="pagination justify-content-center mt-2"
+                (pageChange)="p = $event"></pagination-controls>
+        </div>
 
-        <pagination-controls class="pagination justify-content-center" (pageChange)="p = $event"></pagination-controls>
+
 
         <div class="reservation-legend mt-4">
             <h5 class="sidebar-title mb-3">Légende des Statuts</h5>
@@ -96,8 +100,12 @@
 
         --color-filter-active: #e94560;
         /* Rose vif pour les boutons actifs */
-        --color-filter-hover: #ff85c2;
+        --color-filter-hover: #e0546bd7;
         /* Rose plus clair pour le survol */
+    }
+
+    .card {
+        background-color: transparent;
     }
 
     /* Styles généraux pour le conteneur principal */
@@ -190,7 +198,7 @@
         margin-bottom: 20px !important;
     }
 
-    .reservation-filters .nav-link.active {
+    .reservation-filters .nav-link1.active {
         background-color: var(--color-reserved);
         /* Utilisation de votre couleur bleue */
         color: white;
@@ -198,7 +206,7 @@
     }
 
     /* Filtres de Réservations (Nav Pills) */
-    .reservation-filters .nav-link {
+    .reservation-filters .nav-link1 {
         border-radius: 50px;
         padding: 8px 18px;
         font-size: 0.9em;
@@ -206,17 +214,19 @@
         color: var(--color-filter-active);
         /* Couleur par défaut des boutons (non actifs) */
         border: 1px solid var(--color-filter-active);
+        color: var(--color-filter-active);
+        background-color: white;
         margin-right: 8px;
     }
 
-    .reservation-filters .nav-link:hover {
+    .reservation-filters .nav-link1:hover {
         background-color: var(--color-filter-hover);
         /* Rose clair au survol */
         color: white;
         border-color: var(--color-filter-hover);
     }
 
-    .reservation-filters .nav-link.active {
+    .reservation-filters .nav-link1.active {
         background-color: var(--color-filter-active);
         /* Rose vif quand actif */
         color: white;
@@ -399,7 +409,7 @@
     }
 
     @media (max-width: 767.98px) {
-        .reservation-filters .nav-link {
+        .reservation-filters .nav-link1 {
             margin-bottom: 5px;
         }
 

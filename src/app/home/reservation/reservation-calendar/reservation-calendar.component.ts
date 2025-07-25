@@ -154,7 +154,7 @@ export class ReservationCalendarComponent implements OnChanges {
     // TODO: envoyer les modifs à l'API
   }
 
-  public colorByEtat(statut: string): string {
+  colorByEtat(statut: string): string {
     switch (statut?.toLowerCase()) {
       case 'confirmee': return '#198754';
       case 'reservee': return '#0d6efd';
