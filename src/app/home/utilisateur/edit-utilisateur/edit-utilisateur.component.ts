@@ -1,10 +1,12 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../../../service/api/api.service';
 import { CommonModule } from '@angular/common';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { md5 } from 'js-md5';
+
 @Component({
   selector: 'app-edit-utilisateur',
   standalone: true, // Composant autonome
@@ -24,6 +26,7 @@ export class EditUtilisateurComponent {
 
   }
   ngOnInit(): void {
+    console.log("EDITTTTT", this.utilisateur_to_edit)
     this.get_details_edit_utilisateur_form()
     this.update_form(this.utilisateur_to_edit)
   }
@@ -32,13 +35,13 @@ export class EditUtilisateurComponent {
     this.reactiveForm_edit_utilisateur = this.formBuilder.group({
       id_privilege: [utilisateur_to_edit.id_privilege, Validators.required],
       id_entreprise: [utilisateur_to_edit.id_entreprise, Validators.required],
-      prenom: [utilisateur_to_edit.prenom, Validators.required],
-      nom: [utilisateur_to_edit.nom, Validators.required],
-      poste: [utilisateur_to_edit.poste],
-      civilite: [utilisateur_to_edit.civilite],
-      telephone: [utilisateur_to_edit.telephone],
-      login: [utilisateur_to_edit.login, Validators.required],
-      password: [utilisateur_to_edit.password]
+      prenom: [this.utilisateur_to_edit.prenom, Validators.required],
+      nom: [this.utilisateur_to_edit.nom, Validators.required],
+      poste: [this.utilisateur_to_edit.poste],
+      civilite: [this.utilisateur_to_edit.civilite],
+      telephone: [this.utilisateur_to_edit.telephone],
+      login: [this.utilisateur_to_edit.login, Validators.required],
+      password: [this.utilisateur_to_edit.password],
     });
   }
 
@@ -54,25 +57,47 @@ export class EditUtilisateurComponent {
       ;
     }
     var utilisateur = this.reactiveForm_edit_utilisateur.value
+    if (+this.api.current_entreprise.id_privilege !== 1 && +utilisateur.id_privilege === 1) {
+      this.api.Swal_info("Ce privilège n'est pas disponible.");
+      return;
+    }
+    var utilisateur_entreprise = {
+      id_entreprise: utilisateur.id_entreprise,
+      id_privilege: utilisateur.id_privilege
+    }
+    utilisateur = {
+      prenom: utilisateur.prenom,
+      nom: utilisateur.nom,
+      poste: utilisateur.poste,
+      civilite: utilisateur.civilite,
+      telephone: utilisateur.telephone,
+      login: utilisateur.login,
+      password: utilisateur.password,
+    }
+    utilisateur.password = utilisateur.password ? md5(utilisateur.password) : this.utilisateur_to_edit.password
     this.edit_utilisateur({
-      condition: ({ id_utilisateur: this.utilisateur_to_edit.id_utilisateur }),
-      condition2: ({ id_utilisateur_entreprise: this.utilisateur_to_edit.id_utilisateur_entreprise }),
-      data: (utilisateur)
+      condition: { id_utilisateur: this.utilisateur_to_edit.id_utilisateur },
+      condition_2: { id_utilisateur_entreprise: this.utilisateur_to_edit.id_utilisateur_entreprise },
+      data: utilisateur,
+      data_2: utilisateur_entreprise
     })
   }
+
   // vider le formulaire
   onReset_edit_utilisateur() {
     this.submitted = false;
     this.reactiveForm_edit_utilisateur.reset();
   }
   edit_utilisateur(utilisateur: any) {
-    this.loading_edit_utilisateur = true;
     this.api.taf_post("utilisateur/edit", utilisateur, (reponse: any) => {
       if (reponse.status) {
-        this.activeModal.close(reponse)
+        this.activeModal.close({
+          status: true,
+          new_data: utilisateur.data
+        })
         console.log("Opération effectuée avec succés sur la table utilisateur. Réponse= ", reponse);
-        //this.onReset_edit_utilisateur()
-        this.api.Swal_success("Opération éffectuée avec succés")
+        this.onReset_edit_utilisateur()
+        this.api.Swal_success("Opération effectuée avec succés sur la table utilisateur")
       } else {
         console.log("L'opération sur la table utilisateur a échoué. Réponse= ", reponse);
         this.api.Swal_error("L'opération a echoué")

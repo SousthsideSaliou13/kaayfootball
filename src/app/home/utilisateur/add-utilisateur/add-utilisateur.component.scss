@@ -1,0 +1,27 @@
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input {
+    width: 100%;
+    padding-right: 40px;
+}
+
+.btn-toggle-password {
+    position: absolute;
+    right: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: grey;
+}
+
+/* Message d'erreur */
+.invalid-feedback .error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}

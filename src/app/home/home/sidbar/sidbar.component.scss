@@ -5,16 +5,17 @@
 
 aside {
   height: 100%;
-  max-height: 100vh;
+  // max-height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #e5e5f7;
-opacity: 0.8;
-background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #e5e5f7 13px ), repeating-linear-gradient( #d3d7d255, #d3d7d2 );
+  opacity: 0.8;
+  background-image: repeating-radial-gradient(circle at 0 0, transparent 0, #e5e5f7 13px), repeating-linear-gradient(#d2d3d755, #d3d7d2);
   // background-color: rgb(179, 179, 179);
   // background-color: rgb(133, 241, 133);
 
 }
+
 // .bg-menu-theme {
 //   background-color: rgb(197, 248, 197);
 //   color: #000;

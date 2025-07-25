@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import moment from 'moment';
 import 'moment/locale/fr';
 import { Location } from '@angular/common';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -28,19 +29,7 @@ export class ApiService {
     {
       menu_header: "Accueil",
       items: [
-        {
-          name: "Terrain",
-          path: "/home/terrain",
-          icon: "bi bi-border",
-          children: [],
-          les_actions: [
-            { menu: "Terrain", ongle: "Terrain", id: "list_Terrain", action: "Lister les Terrains" },
-            { menu: "Terrain", ongle: "Terrain", id: "edit_Terrain", action: "Editer un Terrain" },
-            { menu: "Terrain", ongle: "Terrain", id: "add_Terrain", action: "Ajouter un Terrain" },
-            { menu: "Terrain", ongle: "Terrain", id: "delete_Terrain", action: "Supprimer un Terrain" },
 
-          ],
-        },
         {
           name: "Reservation",
           path: "/home/reservation",
@@ -51,6 +40,19 @@ export class ApiService {
             { menu: "Reservation", ongle: "Reservation", id: "edit_Reservation", action: "Editer un Reservation" },
             { menu: "Reservation", ongle: "Reservation", id: "add_Reservation", action: "Ajouter un Reservation" },
             { menu: "Reservation", ongle: "Reservation", id: "delete_Reservation", action: "Supprimer un Reservation" },
+
+          ],
+        },
+        {
+          name: "Terrain",
+          path: "/home/terrain",
+          icon: "bi bi-border",
+          children: [],
+          les_actions: [
+            { menu: "Terrain", ongle: "Terrain", id: "list_Terrain", action: "Lister les Terrains" },
+            { menu: "Terrain", ongle: "Terrain", id: "edit_Terrain", action: "Editer un Terrain" },
+            { menu: "Terrain", ongle: "Terrain", id: "add_Terrain", action: "Ajouter un Terrain" },
+            { menu: "Terrain", ongle: "Terrain", id: "delete_Terrain", action: "Supprimer un Terrain" },
 
           ],
         },
@@ -345,6 +347,34 @@ export class ApiService {
       })
     };
     this.http.post(api_url, data_to_send, httpOptions).subscribe(
+      (reponse: any) => {// on success
+        on_success(reponse)
+      },
+      (error: any) => {// on error
+        this.on_taf_post_error(error, on_error)
+      }
+    )
+  }
+  async taf_post_with_files(path: string, data_to_send: any, form_files: any, on_success: Function, on_error: Function) {
+    let api_url = this.taf_base_url + path;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: "Bearer " + await this.get_token(),
+      })
+    };
+    const formData = new FormData();
+    // Ajouter les données du formulaire au FormData
+    for (const key in data_to_send) {
+      formData.append(key, data_to_send[key]);
+    }
+    // Ajouter les fichiers sélectionné au FormData
+    for (const key in form_files) {
+      for (let i = 0; i < form_files[key].length; i++) {
+        const one_file = form_files[key][i];
+        formData.append(key + "[]", one_file);
+      }
+    }
+    this.http.post(api_url, formData, httpOptions).subscribe(
       (reponse: any) => {// on success
         on_success(reponse)
       },

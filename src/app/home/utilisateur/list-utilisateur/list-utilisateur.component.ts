@@ -28,12 +28,13 @@ export class ListUtilisateurComponent {
   }
   get_utilisateur() {
     let paarms = {
-      "ue.id_entreprise": this.api.current_entreprise.id_entreprise,
+      id_entreprise: this.api.current_entreprise.id_entreprise,
     }
     this.loading_get_utilisateur = true;
-    this.api.taf_post("utilisateur/get3", paarms, (reponse: any) => {
+    this.api.taf_post("utilisateur/get", paarms, (reponse: any) => {
       if (reponse.status) {
-        this.les_utilisateurs = reponse.data?.les_entreprises
+        this.les_utilisateurs = reponse.data
+        console.log("YESSS", this.les_utilisateurs)
         this.searchService.data = this.les_utilisateurs
         this.searchService.filter_change()
         console.log("Opération effectuée avec succés sur la table utilisateur. Réponse= ", reponse);
@@ -60,14 +61,14 @@ export class ListUtilisateurComponent {
   }
   delete_utilisateur(utilisateur: any) {
     let etat: any
-    if (utilisateur.statut == "actif") {
-      etat = "inactif"
+    if (utilisateur.statut == "Actif") {
+      etat = "Inactif"
     } else {
-      etat = "actif"
+      etat = "Actif"
 
     }
     this.loading_delete_utilisateur = true;
-    this.api.taf_post("utilisateur/edit", { condition: { id_utilisateur: utilisateur.id_utilisateur }, data: { statut: etat } }, (reponse: any) => {
+    this.api.taf_post("utilisateur/edit3", { condition: { id_utilisateur: utilisateur.id_utilisateur }, data: { etat: etat } }, (reponse: any) => {
       //when success
       if (reponse.status) {
         console.log("Opération effectuée avec succés sur la table utilisateur . Réponse = ", reponse)

@@ -5,6 +5,7 @@ import { ApiService } from '../../../service/api/api.service';
 import { CommonModule } from '@angular/common';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
+
 @Component({
   selector: 'app-add-utilisateur',
   standalone: true, // Composant autonome
@@ -17,26 +18,33 @@ export class AddUtilisateurComponent {
   submitted: boolean = false
   loading_add_utilisateur: boolean = false
   form_details: any = {}
+  showPassword = false;
   loading_get_details_add_utilisateur_form = false
-  constructor(private formBuilder: FormBuilder, public api: ApiService, public activeModal: NgbActiveModal) { }
-
-  ngOnInit(): void {
-    this.get_details_add_utilisateur_form()
-    this.init_form()
-  }
-  init_form() {
+  constructor(private formBuilder: FormBuilder, public api: ApiService, public activeModal: NgbActiveModal) {
     this.reactiveForm_add_utilisateur = this.formBuilder.group({
       id_entreprise: ["", Validators.required],
-      id_privilege: ["" , Validators.required],
+      id_privilege: ["", Validators.required],
       prenom: ["", Validators.required],
       nom: ["", Validators.required],
       poste: [""],
       civilite: [""],
       telephone: [""],
       login: ["", Validators.required],
-      password: ["", Validators.required],
+      password: ["", [Validators.required, Validators.minLength(8)]],
     });
+    if (+this.api.current_entreprise.id_privilege !== 11) {
+      this.reactiveForm_add_utilisateur.patchValue({ id_entreprise: this.api.current_entreprise.id_entreprise })
+    }
   }
+
+  ngOnInit(): void {
+    this.get_details_add_utilisateur_form()
+    // this.init_form()
+
+  }
+  // init_form() {
+
+  // }
 
   // acces facile au champs de votre formulaire
   get f(): any { return this.reactiveForm_add_utilisateur.controls; }
@@ -49,7 +57,8 @@ export class AddUtilisateurComponent {
       return;
     }
     var utilisateur = this.reactiveForm_add_utilisateur.value;
-    utilisateur.id_entreprise = this.api.current_entreprise.id_entreprise
+    console.log("Id Entreprise", utilisateur.id_entreprise)
+    console.log("utilisateur", utilisateur)
     this.add_utilisateur(utilisateur)
   }
   // vider le formulaire
@@ -89,5 +98,9 @@ export class AddUtilisateurComponent {
     }, (error: any) => {
       this.loading_get_details_add_utilisateur_form = false;
     })
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }

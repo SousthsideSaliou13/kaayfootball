@@ -20,7 +20,10 @@
             "outputPath": "dist/kaayfootball",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": ["zone.js", "@angular/localize/init"],
+            "polyfills": [
+              "zone.js",
+              "@angular/localize/init"
+            ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -30,20 +33,21 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/rose-red.css",
               "src/styles.scss",
               "public/vendor/bootstrap/css/bootstrap.min.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css"
             ],
-            "scripts": ["node_modules/@popperjs/core/dist/umd/popper.min.js",
+            "scripts": [
+              "node_modules/@popperjs/core/dist/umd/popper.min.js",
               "public/vendor/bootstrap/js/bootstrap.min.js",
               "public/js/config.js",
               "public/js/main.js",
               "public/vendor/js/menu.js",
               "public/vendor/js/helpers.js",
               "public/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"
-
-          ]
+            ]
           },
           "configurations": {
             "production": {
@@ -101,12 +105,16 @@
               }
             ],
             "styles": [
-                     "css/core.css",
+              "@angular/material/prebuilt-themes/rose-red.css",
+              "css/core.css",
               "src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/bootstrap-icons/font/bootstrap-icons.css"
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "src/styles.scss"
             ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.js"]
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.js"
+            ]
           }
         }
       }

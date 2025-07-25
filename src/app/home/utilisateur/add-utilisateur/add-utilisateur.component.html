@@ -1,19 +1,20 @@
 <div class="modal-header" data-bs-theme="ligth">
-  <h1 class="modal-title fs-5">Utilisateur</h1>
+  <h1 class="modal-title fs-5">Ajouter utilisateur</h1>
   <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.close()"></button>
 </div>
 <div class="modal-body">
   <form [formGroup]="reactiveForm_add_utilisateur" (ngSubmit)="onSubmit_add_utilisateur()"
     #form_add_utilisateur="ngForm" class="row">
     <!-- Champs Id Entreprise avec un contrôle de validité : clé étrangère liée à la colonne id_entreprise de la table entreprise -->
-    <div class="form-group col-sm-12 col-md-6 mb-4">
-      <label class="form-label fw-semibold">Entreprise <span class="text-danger">*</span> </label>
+    <div class="form-group col-sm-12 col-md-6 mb-4 " *ngIf="this.api.current_entreprise?.id_privilege == 11">
+      <label class="form-label fw-semibold" class="form-label fw-semibold">Entreprise <span class="text-danger">*</span>
+      </label>
       <ng-select [ngClass]="{ 'is-invalid': submitted && f.id_entreprise.errors }" class=""
         formControlName="id_entreprise">
         <ng-option value="">Sélectionnez une Entreprise</ng-option>
         @for (one_entreprise of form_details?.les_entreprises; track $index) {
         <ng-option [value]="one_entreprise.id_entreprise">
-          {{ one_entreprise.libelle_entreprise}}
+          {{ one_entreprise.nom_entreprise}}
         </ng-option>
         }
       </ng-select>
@@ -26,14 +27,15 @@
       }
     </div>
     <!-- Champ Id Privilege (Clé étrangère vers privilege) -->
-    <div class="form-group col-sm-12 col-md-6 mb-4">
-      <label class="form-label fw-semibold">Privilége <span class="text-danger">*</span> </label>
+    <div class="form-group col-sm-12 mb-4" [ngClass]="{ 'col-md-6': this.api.current_entreprise?.id_privilege == 11 }">
+      <label class="form-label fw-semibold" class="form-label fw-semibold">Privilége <span class="text-danger">*</span>
+      </label>
       <ng-select [ngClass]="{ 'is-invalid': submitted && f.id_privilege.errors }" class=""
         formControlName="id_privilege">
         <ng-option value="">Choisir un Privilége</ng-option>
         @for (one_privilege of form_details?.les_privileges; track $index) {
         <ng-option [value]="one_privilege.id_privilege">
-          {{ one_privilege.libelle_privilege }}
+          {{ one_privilege.libelle }}
         </ng-option>
         }
       </ng-select>
@@ -49,7 +51,8 @@
 
     <!-- Champ Prenom -->
     <div class="form-group col-sm-7">
-      <label class="form-label fw-semibold">Prénom <span class="text-danger">*</span> </label>
+      <label class="form-label fw-semibold" class="form-label fw-semibold">Prénom <span class="text-danger">*</span>
+      </label>
       <input class="form-control" type="text" formControlName="prenom" placeholder="Idy"
         [ngClass]="{ 'is-invalid': submitted && f.prenom.errors }" />
       @if (submitted && f.prenom.errors) {
@@ -63,7 +66,8 @@
 
     <!-- Champ Nom -->
     <div class="form-group col-sm-5">
-      <label class="form-label fw-semibold">Nom <span class="text-danger">*</span></label>
+      <label class="form-label fw-semibold" class="form-label fw-semibold">Nom <span
+          class="text-danger">*</span></label>
       <input class="form-control" type="text" formControlName="nom" placeholder="Ka"
         [ngClass]="{ 'is-invalid': submitted && f.nom.errors }" />
       @if (submitted && f.nom.errors) {
@@ -77,7 +81,7 @@
 
     <!-- Champ Poste -->
     <div class="form-group col-sm-6">
-      <label class="form-label fw-semibold">Poste</label>
+      <label class="form-label fw-semibold" class="form-label fw-semibold">Poste</label>
       <input class="form-control" type="text" formControlName="poste" placeholder="Medecin"
         [ngClass]="{ 'is-invalid': submitted && f.poste.errors }" />
       @if (submitted && f.poste.errors) {
@@ -91,7 +95,7 @@
 
     <!-- Champ Civilite -->
     <div class="form-group col-sm-6">
-      <label class="form-label fw-semibold">Civilité </label>
+      <label class="form-label fw-semibold" class="form-label fw-semibold">Civilité </label>
       <ng-select [ngClass]="{ 'is-invalid': submitted && f.civilite.errors }" class="" formControlName="civilite">
         <ng-option value="">Choisir une Civilité</ng-option>
         <ng-option value="M.">Monsieur</ng-option>
@@ -108,7 +112,7 @@
 
     <!-- Champ Telephone -->
     <div class="form-group col-sm-12">
-      <label class="form-label fw-semibold">Téléphone</label>
+      <label class="form-label fw-semibold" class="form-label fw-semibold">Téléphone</label>
       <input class="form-control" type="text" formControlName="telephone" placeholder="77 XXX XX XX"
         [ngClass]="{ 'is-invalid': submitted && f.telephone.errors }" />
       @if (submitted && f.telephone.errors) {
@@ -122,7 +126,8 @@
 
     <!-- Champ Login -->
     <div class="form-group col-sm-6 mt-4">
-      <label class="form-label fw-semibold">Email / Login <span class="text-danger">*</span></label>
+      <label class="form-label fw-semibold" class="form-label fw-semibold">Email / Login <span
+          class="text-danger">*</span></label>
       <input class="form-control" type="text" formControlName="login" placeholder="issa@xxxx.xx"
         [ngClass]="{ 'is-invalid': submitted && f.login.errors }" />
       @if (submitted && f.login.errors) {
@@ -136,9 +141,16 @@
 
     <!-- Champ password -->
     <div class="form-group col-sm-6 mt-4">
-      <label class="form-label fw-semibold">Mot de passe <span class="text-danger">*</span></label>
-      <input class="form-control" type="password" formControlName="password" placeholder="**********"
-        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+      <label class="form-label fw-semibold" class="form-label fw-semibold">Mot de passe <span
+          class="text-danger">*</span></label>
+      <div class="input-group">
+        <input class="form-control password-input" [type]="showPassword ? 'text' : 'password'"
+          formControlName="password" placeholder="*****************"
+          [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <button type="button" class="btn-toggle-password" (click)="togglePasswordVisibility()">
+          <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+        </button>
+      </div>
       @if (submitted && f.password.errors) {
       <div class="invalid-feedback">
         @if (f.password.errors.required) {
@@ -156,6 +168,6 @@
     {{ loading_add_utilisateur ? "En cours ..." : "Valider" }}
   </button>
   <button type="button" class="btn btn-outline-danger" (click)="activeModal.close()">
-    Fermer
+    Annuler
   </button>
 </div>

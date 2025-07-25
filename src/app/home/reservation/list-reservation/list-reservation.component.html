@@ -1,53 +1,21 @@
 <!-- entete -->
-  <div class="d-flex align-items-center justify-content-between">
-    <div class="fs-1">Reservation  - {{les_reservations.length}}</div>
-    <div class="d-flex">
-      <button class="btn btn-primary" (click)="openModal_add_reservation()">Ajouter Reservation</button>
+<div class="d-flex align-items-center justify-content-between">
+  <div class="fs-1 mb-3">
+    <h2>Liste des réservations - {{les_reservations.length}}</h2>
+  </div>
+  <div class="d-flex">
+    <button class="btn btn-primary" (click)="openModal_add_reservation()">
+      <i class="bi bi-plus-circle me-1"></i> Reservation</button>
+  </div>
+</div>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <app-reservation-calendar [reservations]="les_reservations">
+      </app-reservation-calendar>
     </div>
   </div>
-  <!-- Liste des éléments -->
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">id_reservation</th>
-<th scope="col">id_entreprise</th>
-<th scope="col">id_utilisateur</th>
-<th scope="col">id_terrain</th>
-<th scope="col">id_type_reservation</th>
-<th scope="col">libelle_reservation</th>
-<th scope="col">date</th>
-<th scope="col">heure_debut</th>
-<th scope="col">heure_fin</th>
-<th scope="col">evaluation</th>
-<th scope="col">etat</th>
-<th scope="col">created_at</th>
-<th scope="col">updated_at</th>
-<th scope="col">statut</th><th scope="col">actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (one_reservation of les_reservations; track one_reservation) {
-          <tr>
-            <td>{{one_reservation.id_reservation}}</td>
-<td>{{one_reservation.id_entreprise}}</td>
-<td>{{one_reservation.id_utilisateur}}</td>
-<td>{{one_reservation.id_terrain}}</td>
-<td>{{one_reservation.id_type_reservation}}</td>
-<td>{{one_reservation.libelle_reservation}}</td>
-<td>{{one_reservation.date}}</td>
-<td>{{one_reservation.heure_debut}}</td>
-<td>{{one_reservation.heure_fin}}</td>
-<td>{{one_reservation.evaluation}}</td>
-<td>{{one_reservation.etat}}</td>
-<td>{{one_reservation.created_at}}</td>
-<td>{{one_reservation.updated_at}}</td>
-<td>{{one_reservation.statut}}</td><td>
-    <i style="cursor: pointer;" class="bi bi-pencil-square me-2" (click)="openModal_edit_reservation(one_reservation)"></i>
-    <i style="cursor: pointer;" class="bi bi-trash" (click)="delete_reservation(one_reservation)"></i>
-</td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
+
+</div>
