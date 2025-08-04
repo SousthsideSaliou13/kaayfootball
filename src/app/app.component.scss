@@ -1,0 +1,80 @@
+/* ========================================================================= */
+/* GLOBAL/LAYOUT-LEVEL STYLES                                                */
+/* These define your overall page structure.                                 */
+/* ========================================================================= */
+
+html, body {
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important; /* Critical: Prevent main browser scrollbar */
+    font-family: var(--bs-font-sans-serif);
+    box-sizing: border-box; /* Ensures padding/border are included in height */
+}
+
+.layout-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+    height: 100% !important;
+    box-sizing: border-box;
+}
+
+.layout-container {
+    display: flex !important;
+    flex-grow: 1 !important;
+    height: 100% !important; /* Forces it to fill parent height */
+    overflow: hidden !important; /* Crucial: Prevents children from causing scrollbar here */
+    box-sizing: border-box;
+
+    // IMPORTANT: If you have a fixed topbar/navbar, uncomment and adjust its height here.
+    // E.g., if a fixed navbar is 60px high:
+    // height: calc(100% - 60px) !important;
+}
+
+/* Sidebar Styling */
+.layout-menu {
+    flex-shrink: 0 !important;
+    width: var(--sidebar-width, 280px); /* Define your sidebar width */
+    height: 100% !important; /* Make sidebar take full height of .layout-container */
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-y: auto !important; /* Enable internal scrolling for sidebar content */
+    background-color: #f8f8f8;
+    box-sizing: border-box;
+    // Add your specific sidebar padding, shadow, etc. here
+}
+
+/* Main Content Page Area (next to sidebar) */
+.layout-page {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important; /* Take all available horizontal space */
+    min-width: 0 !important; /* Prevent flex item from overflowing */
+    height: 100% !important; /* Take full height of its flex parent (.layout-container) */
+    overflow-y: auto !important; /* THIS IS THE MAIN SCROLLBAR FOR YOUR PAGE CONTENT if it overflows */
+    background-color: var(--bs-body-bg);
+    box-sizing: border-box;
+}
+
+.content-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+    height: 100% !important; /* Ensure it takes full height */
+    overflow: hidden !important; /* Prevents its direct children from overflowing this wrapper */
+    box-sizing: border-box;
+}
+
+/* Your specific page content container (where your HTML snippet resides) */
+.container-xxl.flex-grow-1.container-p-y,
+.container-fluid { /* Add .container-fluid if it's the main wrapper class for your page */
+    flex-grow: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important; /* Must fill its parent's height */
+    overflow: hidden !important; /* VERY IMPORTANT: Prevents its children (like the calendar row) from overflowing it */
+    padding-top: 20px !important; /* Adjust based on your design */
+    padding-bottom: 20px !important; /* Adjust based on your design */
+    box-sizing: border-box;
+}

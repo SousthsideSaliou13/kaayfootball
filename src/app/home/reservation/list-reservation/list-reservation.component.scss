@@ -1,238 +1,152 @@
 .calendar-wrapper {
-  min-height: 600px;
-}
-
-.reservation-list {
   max-height: 600px;
   overflow-y: auto;
-  background: #f9f9f9;
-  border-left: 3px solid #e94560;
-}
-
-.reservation-item {
+  overflow-x: hidden;
   background: #fff;
-  border-radius: 6px;
-  padding: 0.75rem;
-  transition: background 0.2s ease;
+  border-radius: 0.5rem;
+  padding: 1rem;
 }
 
-.reservation-item:hover {
-  background: #f1f1f1;
+.row {
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
-/* Global/Layout-Level Styles (consider putting these in a global stylesheet like styles.scss) */
-
-html, body {
-    height: 100%; /* Ensure html and body take full viewport height */
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* Prevent main body scrollbar if content is handled by internal scrollbars */
-    font-family: var(--bs-font-sans-serif); /* Consistent font family */
+.col-lg-8 {
+  min-width: 0;
 }
 
-/* Overall layout containers */
-.layout-wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Make the wrapper take at least full viewport height */
-}
+/* ========================================================================= */
+/* COMPONENT-SPECIFIC STYLES (list-reservation.component.scss)             */
+/* ========================================================================= */
 
-.layout-container {
-    display: flex; /* This is key for side-by-side layout (sidebar + main content) */
-    flex-grow: 1; /* Allows it to take remaining vertical space */
-    overflow: hidden; /* Crucial: Prevents children from causing scrollbar on this container */
-    // If you have a fixed topbar/navbar, you might need height: calc(100% - fixed-navbar-height) here
-}
-
-/* Sidebar Styling (from previous answers, ensuring it fits vertically) */
-.layout-menu {
-    flex-shrink: 0; /* Prevent sidebar from shrinking when content grows */
-    heighta: 100%; /* Make sidebar take full height of .layout-container */
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto; /* Enable internal scrolling for sidebar content if it gets too long */
-    background-color: #f8f8f8; /* Example background */
-    // Add any specific padding, shadow, etc. here
-}
-
-/* Main Content Page Area (next to sidebar) */
-.layout-page {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1; /* Allows it to take all available horizontal space */
-    min-width: 0; /* Prevents flex item from overflowing due to its content (a common flex bug) */
-    height: 100%; /* Take full height of .layout-container */
-    overflow-y: auto; /* This will be the main scrollbar for the right content area if it exceeds viewport */
-    background-color: var(--bs-body-bg); // Use Bootstrap's default background
-}
-
-.content-wrapper {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    overflow: hidden; /* Prevents its direct children from overflowing */
-}
-
-/* Your specific page content container (where your HTML snippet resides) */
-.container-fluid.py-4, /* Adjusted from previous answer */
-.container-xxl.flex-grow-1.container-p-y { /* Common class names from themes */
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden; /* This is VERY IMPORTANT for the calendar to not overflow this container */
-    padding-top: 20px; /* Example padding, adjust as needed */
-    padding-bottom: 20px; /* Example padding, adjust as needed */
-    // Ensure no fixed height here that would conflict
-}
-
-
-/* --- Styles for list-reservation.component.scss --- */
-
-/* Page Header for Reservations */
-.page-header {
-    margin-bottom: 1.5rem;
-    padding: 0 15px; // Ensure padding matches your container fluid or is removed if container has it
-}
-.page-header h2 {
-    font-size: 2rem;
-    color: var(--bs-primary);
-}
-.page-header .badge {
-    vertical-align: middle;
-}
-.page-header .btn {
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-}
-
-
-/* Main Row for Calendar and List */
-.row.g-3.mt-4 {
-    flex-grow: 1; /* Allow the row to take available vertical space */
-    margin-top: 0 !important; /* Reset default mt-4 if it creates extra space */
-    height: calc(100% - var(--header-height, 80px)); /* Example: Adjust this calculation */
-                                                    /* Replace 80px with actual height of your header/button area above */
-    // If you add a custom --header-height variable earlier in your CSS:
-    // --header-height: 100px; /* Example */
-}
-
-/* Calendar Wrapper */
-.calendar-wrapper {
-    flex-grow: 1; /* Allow calendar wrapper to take available height in its column */
-    display: flex; /* Make it a flex container so FullCalendar can stretch */
-    flex-direction: column;
-    height: 100%; /* Crucial: Make calendar wrapper take full height of its column */
-    overflow: hidden; /* Hides any direct overflow from FullCalendar itself */
-    min-height: 550px; /* A reasonable minimum height for the calendar */
-    padding: 1rem !important; /* Ensure consistent padding */
-    border: 1px solid var(--bs-border-color); /* Subtle border */
-    border-radius: 0.5rem; /* Match Bootstrap's rounded */
-}
-
-/* FullCalendar internal height management (VERY IMPORTANT for internal scroll) */
-::ng-deep .fc {
-    display: flex;
-    flex-direction: column;
-    height: 100%; /* FullCalendar component itself takes 100% of its wrapper's height */
-    font-family: var(--bs-font-sans-serif);
-}
-
-::ng-deep .fc .fc-view-harness {
-    flex-grow: 1; /* The main calendar view (days/times) takes up remaining space */
-    height: 100%; /* Ensures it fills available space */
-}
-
-::ng-deep .fc-scrollgrid {
-    height: 100%; /* Ensures the grid structure takes up height */
-    display: flex;
-    flex-direction: column;
-}
-
-::ng-deep .fc-scrollgrid-sync-table {
-    height: 100%; /* Table containing calendar cells */
-    display: flex;
-    flex-direction: column;
-}
-
-::ng-deep .fc-scroller {
-    overflow-y: auto !important; /* This is where FullCalendar's internal scrollbar will appear */
-    // If you want to customize scrollbar appearance, do it here
-}
+// ... (Keep all existing calendar-related CSS from previous answers for layout and embellishment) ...
 
 /* Reservation List Container */
-.reservation-list-container { /* Renamed from .reservation-list for clarity */
-    display: flex;
-    flex-direction: column;
-    height: 100%; /* Make reservation list container take full height of its column */
-    min-height: 400px; /* Minimum height for the list */
+.col-lg-4 > .reservation-list {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    min-height: 400px !important;
     padding: 1rem !important;
     border: 1px solid var(--bs-border-color);
     border-radius: 0.5rem;
+    background: #f9f9f9;
+    border-left: 3px solid var(--bs-primary); // Using primary color for the left border
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); // Subtle overall shadow
 }
 
-.reservation-list-container .h6 {
-    padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
+.reservation-list > h6 {
+    flex-shrink: 0 !important;
+    margin-bottom: 1rem !important; // Adjust spacing if needed
+    padding-bottom: 0.75rem !important; // Increased padding for the bottom border
+    border-bottom: 1px solid var(--bs-border-color) !important; // A more neutral border
+    color: var(--bs-secondary) !important; // Subtle color for the heading
+    font-size: 1.1rem !important;
 }
 
-.reservation-items-wrapper {
-    flex-grow: 1; /* Takes remaining space in the list container */
-    overflow-y: auto; /* Crucial: This makes the reservation list scroll internally */
-    padding-right: 5px; /* Add some padding for the scrollbar */
+.reservation-list > div[class*="text-muted"] { // For "Aucune réservation trouvée"
+    flex-shrink: 0 !important;
+    text-align: center !important;
+    padding: 2rem 0 !important;
+    color: var(--bs-gray-600) !important;
 }
 
-/* Custom scrollbar for webkit browsers */
-.reservation-items-wrapper::-webkit-scrollbar,
-::ng-deep .fc-scroller::-webkit-scrollbar {
-    width: 8px;
-}
-.reservation-items-wrapper::-webkit-scrollbar-track,
-::ng-deep .fc-scroller::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-}
-.reservation-items-wrapper::-webkit-scrollbar-thumb,
-::ng-deep .fc-scroller::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 10px;
-}
-.reservation-items-wrapper::-webkit-scrollbar-thumb:hover,
-::ng-deep .fc-scroller::-webkit-scrollbar-thumb:hover {
-    background: #999;
+.reservation-list-scroll-area {
+    flex-grow: 1 !important;
+    overflow-y: auto !important;
+    padding-right: 5px; // Space for scrollbar
+    box-sizing: border-box;
 }
 
-/* Individual Reservation Item Styling (from previous answer) */
+/* Individual Reservation Item Styling */
 .reservation-item {
-    background-color: #f8f9fa;
-    border-left: 5px solid var(--bs-primary);
-    position: relative;
-    overflow: hidden;
-    transition: all 0.2s ease-in-out;
-    margin-bottom: 1rem; // Add margin bottom for spacing
+    background: #fff;
+    border-radius: 8px; // Slightly more rounded corners
+    padding: 1rem; // Increased padding inside item
+    margin-bottom: 0.75rem; // Space between items
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); // More pronounced shadow for items
+    transition: all 0.2s ease-in-out; // Smooth transition for hover effects
+    border: 1px solid #e0e0e0; // Light border around each item
+    display: flex; // Use flexbox for vertical layout
+    flex-direction: column;
 }
 
 .reservation-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
+    background: #f7f7f7; // Lighter hover background
+    transform: translateY(-3px); // More noticeable lift on hover
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); // Stronger shadow on hover
 }
 
-.reservation-item .small i {
-    color: var(--bs-secondary);
+.reservation-item .fw-semibold {
+    font-size: 1.1rem; // Slightly larger title
+    color: var(--bs-primary); // Primary color for the title
+    margin-right: 1rem; // Space between title and buttons
 }
 
-.btn-outline-primary.rounded-circle,
-.btn-outline-danger.rounded-circle {
-    width: 38px;
-    height: 38px;
+.reservation-item .reservation-details {
+    font-size: 0.9rem; // Slightly larger details text
+    color: var(--bs-gray-700); // Darker text for details
+    margin-top: 0.5rem; // Space between title/buttons and details
+}
+
+.reservation-item .reservation-details i {
+    color: var(--bs-secondary); // Icon color
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.reservation-item .reservation-actions {
+    flex-shrink: 0; // Prevent buttons from shrinking
+    display: flex;
+    gap: 0.5rem; // Space between buttons
+}
+
+.reservation-item .btn-sm {
+    padding: 0.4rem !important; // Adjust button padding for size
+    width: 36px; // Fixed width for consistent circle
+    height: 36px; // Fixed height for consistent circle
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
-    font-size: 1rem;
+    font-size: 0.9rem; // Smaller icon size
 }
-.row.g-3.mt-4 {
-    flex-grow: 1;
-    margin-top: 0 !important;
-    height: calc(100% - var(--header-height, 80px)); /* <--- This is the key */
+
+.reservation-item .btn-outline-primary {
+    border-color: var(--bs-primary);
+    color: var(--bs-primary);
+    &:hover {
+        background-color: var(--bs-primary);
+        color: #fff;
+    }
+}
+
+.reservation-item .btn-outline-danger {
+    border-color: var(--bs-danger);
+    color: var(--bs-danger);
+    &:hover {
+        background-color: var(--bs-danger);
+        color: #fff;
+    }
+}
+
+/* Custom scrollbar for webkit browsers */
+.reservation-list-scroll-area::-webkit-scrollbar,
+::ng-deep .fc-scroller::-webkit-scrollbar {
+    width: 8px !important;
+    background-color: transparent !important;
+}
+.reservation-list-scroll-area::-webkit-scrollbar-track,
+::ng-deep .fc-scroller::-webkit-scrollbar-track {
+    background: #f1f1f1 !important;
+    border-radius: 10px !important;
+}
+.reservation-list-scroll-area::-webkit-scrollbar-thumb,
+::ng-deep .fc-scroller::-webkit-scrollbar-thumb {
+    background: #ccc !important;
+    border-radius: 10px !important;
+}
+.reservation-list-scroll-area::-webkit-scrollbar-thumb:hover,
+::ng-deep .fc-scroller::-webkit-scrollbar-thumb:hover {
+    background: #999 !important;
 }
