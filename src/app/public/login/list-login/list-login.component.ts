@@ -21,6 +21,7 @@ export class ListLoginComponent {
     ngOnInit(): void {
         this.init_form()
     }
+
     init_form() {
         this.reactiveForm_login_login = this.formBuilder.group({
             login: ["", Validators.required],

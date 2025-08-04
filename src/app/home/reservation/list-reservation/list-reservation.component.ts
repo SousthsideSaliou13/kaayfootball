@@ -1,103 +1,119 @@
 import { Component } from '@angular/core';
-  import { ApiService } from '../../../service/api/api.service';
-  import { AddReservationComponent } from '../add-reservation/add-reservation.component';
-  import { EditReservationComponent } from '../edit-reservation/edit-reservation.component';
-  import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-  @Component({
-    selector: 'app-list-reservation',
-    standalone: true, // Composant autonome
-    imports: [AddReservationComponent,EditReservationComponent], // Dépendances importées
-    templateUrl: './list-reservation.component.html',
-    styleUrls: ['./list-reservation.component.scss']
-  })
-  export class ListReservationComponent {
-    loading_get_reservation = false
-    les_reservations: any[] = []
-    selected_reservation: any = undefined
-    reservation_to_edit: any = undefined
-    loading_delete_reservation = false
-    constructor(public api: ApiService,private modalService: NgbModal) {
-  
-    }
-    ngOnInit(): void {
-      this.get_reservation()
-    }
-    get_reservation() {
-      this.loading_get_reservation = true;
-      this.api.taf_post("reservation/get", {}, (reponse: any) => {
-        if (reponse.status) {
-          this.les_reservations = reponse.data
-          console.log("Opération effectuée avec succés sur la table reservation. Réponse= ", reponse);
-        } else {
-          console.log("L'opération sur la table reservation a échoué. Réponse= ", reponse);
-          this.api.Swal_error("L'opération a echoué")
-        }
-        this.loading_get_reservation = false;
-      }, (error: any) => {
-        this.loading_get_reservation = false;
-      })
-    }
-  
-    voir_plus(one_reservation: any) {
-      this.selected_reservation = one_reservation
-    }
-    on_click_edit(one_reservation: any) {
-      this.reservation_to_edit = one_reservation
-    }
-    on_close_modal_edit(){
-      this.reservation_to_edit=undefined
-    }
-    delete_reservation (reservation : any){
-      this.loading_delete_reservation = true;
-      this.api.taf_post("reservation/delete", reservation,(reponse: any)=>{
-        //when success
-        if(reponse.status){
-          console.log("Opération effectuée avec succés sur la table reservation . Réponse = ",reponse)
-          this.get_reservation()
-          this.api.Swal_success("Opération éffectuée avec succés")
-        }else{
-          console.log("L'opération sur la table reservation  a échoué. Réponse = ",reponse)
-          this.api.Swal_error("L'opération a echoué")
-        }
-        this.loading_delete_reservation = false;
-      },
-      (error: any)=>{
-        //when error
-        console.log("Erreur inconnue! ",error)
-        this.loading_delete_reservation = false;
-      })
-    }
-    openModal_add_reservation() {
-      let options: any = {
-        centered: true,
-        scrollable: true,
-        size: "lg"//'sm' | 'lg' | 'xl' | string
-      }
-      const modalRef = this.modalService.open(AddReservationComponent, { ...options, backdrop: 'static' })
-      modalRef.result.then((result: any) => {
-        console.log('Modal closed with:', result);
-        if (result?.status) {
-          this.get_reservation()
-        } else {
+import { ApiService } from '../../../service/api/api.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddReservationComponent } from '../add-reservation/add-reservation.component';
+import { EditReservationComponent } from '../edit-reservation/edit-reservation.component';
 
-        }
-      })
-    }
-    openModal_edit_reservation(one_reservation: any) {
-      let options: any = {
-        centered: true,
-        scrollable: true,
-        size: "lg"//'sm' | 'lg' | 'xl' | string
-      }
-      const modalRef = this.modalService.open(EditReservationComponent, { ...options, backdrop: 'static', })
-      modalRef.componentInstance.reservation_to_edit = one_reservation;
-      modalRef.result.then((result: any) => {
-        console.log('Modal closed with:', result);
-        if (result?.status) {
-          this.get_reservation()
-        } else {
+import { CalendarOptions } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CommonModule } from '@angular/common';
 
-        }
-      })
-    }
+@Component({
+  selector: 'app-list-reservation',
+  standalone: true,
+  imports: [AddReservationComponent, EditReservationComponent, CommonModule, FullCalendarModule],
+  templateUrl: './list-reservation.component.html',
+  styleUrls: ['./list-reservation.component.scss']
+})
+export class ListReservationComponent {
+  loading_get_reservation = false;
+  les_reservations: any[] = [];
+
+  calendarOptions: CalendarOptions = {
+    plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+    initialView: 'timeGridWeek',
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    },
+    events: [],
+    slotMinTime: '06:00:00',
+    slotMaxTime: '23:00:00',
+    nowIndicator: true,
+    eventColor: '#198754',
+    eventTextColor: '#fff',
+     height: 'auto', // Keep auto for general responsiveness, but let CSS control the container
+        expandRows: true, // Crucial for making it fill the container
+        contentHeight: 'auto',
+    editable: false,
+    eventClick: this.handleEventClick.bind(this),
+  };
+
+  constructor(public api: ApiService, private modalService: NgbModal) { }
+
+  ngOnInit(): void {
+    this.get_reservation();
   }
+
+  get_reservation() {
+    this.loading_get_reservation = true;
+    const params = {
+      id_entreprise: this.api.current_entreprise.id_entreprise,
+    };
+
+    this.api.taf_post("reservation/get", params, (reponse: any) => {
+      if (reponse.status) {
+        this.les_reservations = reponse.data;
+
+        // injecter dans FullCalendar
+        this.calendarOptions.events = this.les_reservations.map(r => ({
+          id: r.id_reservation,
+          title: r.libelle_reservation,
+          start: `${r.date}T${r.heure_debut}`,
+          end: `${r.date}T${r.heure_fin}`,
+          extendedProps: r
+        }));
+      } else {
+        this.api.Swal_error("L'opération a échoué");
+      }
+      this.loading_get_reservation = false;
+    }, () => {
+      this.loading_get_reservation = false;
+    });
+  }
+
+  handleEventClick(arg: any) {
+    const reservation = arg.event.extendedProps;
+    this.openModal_edit_reservation(reservation);
+  }
+
+  openModal_add_reservation() {
+    const modalRef = this.modalService.open(AddReservationComponent, { centered: true, scrollable: true, size: 'lg', backdrop: 'static' });
+    modalRef.result.then((result: any) => {
+      if (result?.status) this.get_reservation();
+    });
+  }
+
+  openModal_edit_reservation(reservation: any) {
+    const modalRef = this.modalService.open(EditReservationComponent, { centered: true, scrollable: true, size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.reservation_to_edit = reservation;
+    modalRef.result.then((result: any) => {
+      if (result?.status) this.get_reservation();
+    });
+  }
+
+  delete_reservation(reservation: any) {
+
+    let etat: any
+    if (reservation.etat == "actif") {
+      etat = "inactif"
+    } else {
+      etat = "actif"
+    }
+
+    this.api.taf_post("reservation/edit", { condition: { id_reservation: reservation.id_reservation }, data: { etat: etat } }, (reponse: any) => {
+      if (reponse.status) {
+        this.api.Swal_success("Suppression réussie");
+        this.get_reservation();
+      } else {
+        this.api.Swal_error("La suppression a échoué");
+      }
+    }, () => {
+      this.api.Swal_error("La suppression a échoué");
+    });
+  }
+}

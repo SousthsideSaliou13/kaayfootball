@@ -68,9 +68,14 @@ export class ListTerrainComponent {
   }
   delete_terrain(terrain: any) {
     this.loading_delete_terrain = true;
-    this.api.taf_post(
-      'terrain/delete',
-      terrain,
+     let etat: any
+    if (terrain.etat == "actif") {
+      etat = "inactif"
+    } else {
+      etat = "actif"
+    }
+    
+    this.api.taf_post("terrain/edit", { condition: { id_terrain: terrain.id_terrain }, data: { etat: etat } },
       (reponse: any) => {
         //when success
         if (reponse.status) {

@@ -95,130 +95,6 @@ table {
 
 }
 
-// thead,th {
-//   background-color: #E8EBED;
-
-// }
-// .table:not(.table-dark) th {
-//   color: #1c5145;
-
-
-//   // th {
-//   //   background-color: #E8EBED;
-
-//   // }
-
-//   // .table:not(.table-dark) th {
-//   //   color: #1c5145;
-//   // }
-
-//   // th,
-//   // td {
-//   //   text-align: left;
-//   //   padding: 12px;
-//   //   border-bottom: 1px solid #ddd;
-//   //   color: #333;
-
-// }
-
-// // th, td {
-// //   text-align: left;
-// //   padding: 12px;
-// //   border-bottom: 1px solid #ddd;
-// //   color: #333;
-// // }
-
-// // th {
-// //   font-weight: 600;
-// // }
-
-// /* Dernière ligne sans bordure */
-// tbody tr:last-child td {
-//   border-bottom: none;
-// }
-
-// // /* Petite flèche indicative de tri (statique) */
-// .arrow {
-//   font-size: 12px;
-//   margin-left: 4px;
-//   color: #999;
-// }
-
-// // /* Pagination info */
-// .pagination-info {
-//   font-size: 14px;
-//   color: #666;
-//   margin-bottom: 10px;
-// }
-
-// // /* Contrôles de pagination */
-// .pagination-controls {
-//   display: flex;
-//   align-items: center;
-//   gap: 10px;
-// }
-
-// .pagination-controls button {
-//   background-color: #fff;
-//   border: 1px solid #ccc;
-//   padding: 6px 12px;
-//   border-radius: 4px;
-//   cursor: pointer;
-// }
-
-// .pagination-controls button:disabled {
-//   cursor: not-allowed;
-//   opacity: 0.5;
-// }
-
-// // .card {
-// //   transition: transform 0.2s, box-shadow 0.2s;
-// // }
-
-// .card:hover {
-//   transform: translateY(-5px);
-//   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-// }
-
-// // .card-title {
-// //   font-weight: bold;
-// //   font-size: 1.25rem;
-// // }
-
-// // .card-text {
-// //   margin-bottom: 0.5rem;
-// // }
-
-// // .dropdown-menu {
-// //   min-width: 150px; // Pour une meilleure présentation
-// // }
-
-// // .text-primary {
-// //   color: #007bff; // Couleur Bootstrap pour le texte
-// // }
-
-// .border-light {
-//   border: 1px solid rgba(0, 0, 0, 0.125);
-// }
-
-// .custom-card {
-//   background-color: rgba(255, 255, 255, 0.9); // Fond blanc semi-transparent
-//   border: 1px solid rgba(0, 0, 0, 0.1); // Bordure légère
-//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Ombre légère
-//   transition: transform 0.2s, box-shadow 0.2s;
-// }
-
-// .custom-card:hover {
-//   transform: translateY(-5px);
-//   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); // Ombre plus marquée au survol
-// }
-
-// // .card-title {
-// //   font-weight: bold;
-// //   font-size: 1.25rem;
-// // }
-
-// }
 
 h6,
 .h6,
@@ -261,3 +137,6 @@ h1,
   font-weight: 500;
   color: #566a7f !important;
 }
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';

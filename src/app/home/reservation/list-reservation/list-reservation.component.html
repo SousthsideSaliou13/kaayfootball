@@ -1,53 +1,41 @@
-<!-- entete -->
-  <div class="d-flex align-items-center justify-content-between">
-    <div class="fs-1">Reservation  - {{les_reservations.length}}</div>
-    <div class="d-flex">
-      <button class="btn btn-primary" (click)="openModal_add_reservation()">Ajouter Reservation</button>
+<div class="d-flex align-items-center justify-content-between">
+  <div class="fs-1">
+    <h2>Reservations - {{ les_reservations.length }}</h2>
+  </div>
+  <div class="d-flex">
+    <button class="btn btn-primary" (click)="openModal_add_reservation()">
+      <i class="bi bi-plus-circle-dotted"></i>
+     Réservation
+    </button>
+  </div>
+</div>
+
+<div class="row g-3 mt-4">
+  <!-- Calendrier -->
+  <div class="col-lg-8">
+    <div class="calendar-wrapper shadow-sm rounded bg-white p-2">
+      <full-calendar [options]="calendarOptions"></full-calendar>
     </div>
   </div>
-  <!-- Liste des éléments -->
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">id_reservation</th>
-<th scope="col">id_entreprise</th>
-<th scope="col">id_utilisateur</th>
-<th scope="col">id_terrain</th>
-<th scope="col">id_type_reservation</th>
-<th scope="col">libelle_reservation</th>
-<th scope="col">date</th>
-<th scope="col">heure_debut</th>
-<th scope="col">heure_fin</th>
-<th scope="col">evaluation</th>
-<th scope="col">etat</th>
-<th scope="col">created_at</th>
-<th scope="col">updated_at</th>
-<th scope="col">statut</th><th scope="col">actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (one_reservation of les_reservations; track one_reservation) {
-          <tr>
-            <td>{{one_reservation.id_reservation}}</td>
-<td>{{one_reservation.id_entreprise}}</td>
-<td>{{one_reservation.id_utilisateur}}</td>
-<td>{{one_reservation.id_terrain}}</td>
-<td>{{one_reservation.id_type_reservation}}</td>
-<td>{{one_reservation.libelle_reservation}}</td>
-<td>{{one_reservation.date}}</td>
-<td>{{one_reservation.heure_debut}}</td>
-<td>{{one_reservation.heure_fin}}</td>
-<td>{{one_reservation.evaluation}}</td>
-<td>{{one_reservation.etat}}</td>
-<td>{{one_reservation.created_at}}</td>
-<td>{{one_reservation.updated_at}}</td>
-<td>{{one_reservation.statut}}</td><td>
-    <i style="cursor: pointer;" class="bi bi-pencil-square me-2" (click)="openModal_edit_reservation(one_reservation)"></i>
-    <i style="cursor: pointer;" class="bi bi-trash" (click)="delete_reservation(one_reservation)"></i>
-</td>
-          </tr>
-        }
-      </tbody>
-    </table>
+
+  <!-- Liste des réservations -->
+  <div class="col-lg-4">
+    <div class="reservation-list shadow-sm rounded bg-white p-3 h-100 overflow-auto">
+      <h6 class="fw-bold border-bottom pb-2 mb-3 text-muted">Liste des réservations</h6>
+      <div *ngIf="les_reservations.length === 0" class="text-muted small">Aucune réservation trouvée</div>
+
+      <div *ngFor="let r of les_reservations" class="reservation-item border-bottom pb-2 mb-2">
+        <div class="fw-semibold">{{ r.libelle_reservation }}</div>
+        <div class="small text-muted">{{ r.date }} | {{ r.heure_debut }} → {{ r.heure_fin }}</div>
+        <div class="d-flex justify-content-end gap-2 mt-2">
+          <button class="btn btn-sm btn-outline-primary" (click)="openModal_edit_reservation(r)">
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button class="btn btn-sm btn-outline-danger" (click)="delete_reservation(r)">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
